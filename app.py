@@ -1,7 +1,7 @@
 import streamlit as st
 
-st.set_page_config(page_title="Neurodiversity App", page_icon="🌿", layout="wide")
+st.set_page_config(page_title="Neurodiversity Communication Toolkit", page_icon="🌿", layout="wide")
 
-st.title("Neurodiversity Communication Toolkit")
-st.write("Deployed successfully ✅")
-st.info("Next: we’ll add Framework, Toolkit, Feedback Tool, and About pages.")
+st.write("Open the Home page from the sidebar →")
+st.info("If you don’t see it, confirm you created pages/1_Home.py in GitHub.")
+
