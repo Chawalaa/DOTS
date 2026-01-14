@@ -23,7 +23,7 @@ st.divider()
 st.subheader("Explore" if get_lang() == "English" else "探す")
 q1, q2, q3 = st.columns(3)
 with q1:
-    st.page_link("pages/2_Phrases_and_Scripts.py", label="Browse phrases & scripts" if get_lang()=="English" else "フレーズ／台本を見る", icon="🗣️")
+    st.page_link("pages/2_Phrases_and_Scripts.py", label="Browse phrases & scripts" if get_lang()=="English" else "フレーズ／台本を見る",)
 with q2:
     st.page_link("pages/3_Visual_Tools.py", label="Explore visual tools" if get_lang()=="English" else "視覚ツールを見る",)
 with q3:
