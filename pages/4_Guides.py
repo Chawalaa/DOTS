@@ -55,5 +55,3 @@ st.markdown(
     "3) Align on supportive language"
 )
 
-st.caption("Source: DOTS toolkit layout. :contentReference[oaicite:4]{index=4}")
-
