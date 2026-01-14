@@ -1,7 +1,7 @@
 import streamlit as st
 from components.ui import language_toggle, t, page_header, get_lang
 
-st.set_page_config(page_title="Home", page_icon="🏠", layout="wide")
+st.set_page_config(page_title="Home", layout="wide")
 
 language_toggle(sidebar=True)
 
@@ -25,7 +25,7 @@ q1, q2, q3 = st.columns(3)
 with q1:
     st.page_link("pages/2_Phrases_and_Scripts.py", label="Browse phrases & scripts" if get_lang()=="English" else "フレーズ／台本を見る", icon="🗣️")
 with q2:
-    st.page_link("pages/3_Visual_Tools.py", label="Explore visual tools" if get_lang()=="English" else "視覚ツールを見る", icon="🧩")
+    st.page_link("pages/3_Visual_Tools.py", label="Explore visual tools" if get_lang()=="English" else "視覚ツールを見る",)
 with q3:
-    st.page_link("pages/4_Guides.py", label="View conversation guides" if get_lang()=="English" else "会話ガイドを見る", icon="🧭")
+    st.page_link("pages/4_Guides.py", label="View conversation guides" if get_lang()=="English" else "会話ガイドを見る",)
 
