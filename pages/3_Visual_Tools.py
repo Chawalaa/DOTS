@@ -360,4 +360,283 @@ st.download_button(
     file_name="typography_guidelines.md",
     mime="text/markdown",
 )
+# --- NEW: Layout & Material Rules ---
+st.subheader("Layout & Material Rules" if get_lang() == "English" else "レイアウト／素材ルール")
+
+st.write(
+    "Layout and material choices are designed to support clarity, calm attention, and ease of use. "
+    "The goal is quick consultation in real-world educational settings."
+    if get_lang() == "English"
+    else
+    "レイアウトと素材の選択は、明確さ・落ち着いた注意・使いやすさを支えるために設計します。"
+    "教育現場で“すぐ参照できる”ことを優先します。"
+)
+
+with st.expander("Layout Principles", expanded=True):
+    if get_lang() == "English":
+        st.markdown(
+            "- Use generous margins and white space\n"
+            "- Avoid dense or cluttered layouts\n"
+            "- Maintain clear visual hierarchy\n"
+            "- Allow content to breathe\n"
+            "- Layouts should feel open, calm, and approachable"
+        )
+    else:
+        st.markdown(
+            "- 余白（マージン）とホワイトスペースを十分に取る\n"
+            "- 密集／ごちゃごちゃした配置を避ける\n"
+            "- 明確な視覚的ヒエラルキー（見出し→本文）を保つ\n"
+            "- 情報が“息ができる”配置にする\n"
+            "- 開放的で落ち着きがあり、話しかけやすい印象にする"
+        )
+
+with st.expander("Content Focus", expanded=False):
+    if get_lang() == "English":
+        st.markdown(
+            "- One main idea per card or screen\n"
+            "- Avoid combining multiple instructions or messages\n"
+            "- Break information into short, digestible units\n"
+            "- This supports quick understanding and reduces cognitive load"
+        )
+    else:
+        st.markdown(
+            "- 1枚（1画面）につき主題は1つ\n"
+            "- 複数の指示／メッセージを混ぜない\n"
+            "- 短く消化しやすい単位に分ける\n"
+            "- すばやい理解と認知負荷の軽減につながる"
+        )
+
+with st.expander("Suitable Formats", expanded=False):
+    if get_lang() == "English":
+        st.markdown(
+            "- A6 narrative cards\n"
+            "- Quick-reference guides\n"
+            "- Mobile-first app screens\n\n"
+            "These reflect how educators access information during daily practice."
+        )
+    else:
+        st.markdown(
+            "- A6ナラティブカード\n"
+            "- クイック参照ガイド\n"
+            "- モバイル前提のアプリ画面\n\n"
+            "教育者が日常の実践の中で情報にアクセスする方法を前提にしています。"
+        )
+
+with st.expander("Interaction Philosophy", expanded=False):
+    if get_lang() == "English":
+        st.markdown(
+            "- Layouts are designed to be consulted, not studied\n"
+            "- Content should be readable at a glance\n"
+            "- Users should not need extended attention or explanation\n"
+            "- Tools should support, not interrupt, communication"
+        )
+    else:
+        st.markdown(
+            "- レイアウトは「学習」ではなく「参照」される設計\n"
+            "- ひと目で読めること\n"
+            "- 長い集中や追加説明を必要としないこと\n"
+            "- 会話を妨げず、支えるツールであること"
+        )
+
+with st.expander("Consistency Across Materials", expanded=False):
+    if get_lang() == "English":
+        st.markdown(
+            "- Keep layout rules consistent across:\n"
+            "  - printed cards\n"
+            "  - app screens\n"
+            "  - visual tools\n\n"
+            "Consistency supports familiarity and emotional safety over time."
+        )
+    else:
+        st.markdown(
+            "- ルールは次の媒体で一貫させる：\n"
+            "  - 印刷カード\n"
+            "  - アプリ画面\n"
+            "  - 視覚ツール\n\n"
+            "一貫性は、慣れと安心感（心理的安全性）を積み重ねます。"
+        )
+
+st.info(
+    "Summary: Layout emphasizes restraint, clarity, and usability so the tools remain supportive rather than demanding."
+    if get_lang() == "English"
+    else
+    "まとめ：レイアウトは抑制・明確さ・実用性を重視し、ツールが“負担”ではなく“支え”として機能するようにします。"
+)
+
+layout_md = """# Layout & Material Rules
+
+Layout and material choices support clarity, calm attention, and ease of use.
+The framework prioritizes layouts that can be consulted quickly in real-world educational settings.
+
+## Layout Principles
+- Use generous margins and white space
+- Avoid dense or cluttered layouts
+- Maintain clear visual hierarchy
+- Allow content to breathe
+- Layouts should feel open, calm, and approachable
+
+## Content Focus
+- One main idea per card or screen
+- Avoid combining multiple instructions or messages
+- Break information into short, digestible units
+- Supports quick understanding and reduces cognitive load
+
+## Suitable Formats
+- A6 narrative cards
+- Quick-reference guides
+- Mobile-first app screens
+
+These formats reflect how educators access information during daily practice.
+
+## Interaction Philosophy
+- Layouts are designed to be consulted, not studied
+- Content should be readable at a glance
+- Users should not need extended attention or explanation
+- Tools should support, not interrupt, communication
+
+## Consistency Across Materials
+Keep layout rules consistent across:
+- printed cards
+- app screens
+- visual tools
+
+Consistency supports familiarity and emotional safety over time.
+
+## Summary
+Layout emphasizes restraint, clarity, and usability, ensuring tools remain supportive rather than demanding.
+"""
+
+st.download_button(
+    label="Download Layout & Material Rules" if get_lang() == "English" else "レイアウト／素材ルールをダウンロード",
+    data=layout_md.encode("utf-8"),
+    file_name="layout_material_rules.md",
+    mime="text/markdown",
+)
+
+st.divider()
+
+# --- NEW: Explicit Exclusions ---
+st.subheader("Explicit Exclusions" if get_lang() == "English" else "明確な除外項目")
+
+st.write(
+    "Certain visual elements are intentionally excluded to protect the framework’s non-clinical, non-evaluative positioning. "
+    "These exclusions help prevent labeling, comparison, or unintended judgment."
+    if get_lang() == "English"
+    else
+    "本フレームワークが「非臨床／非評価」の立ち位置を保つため、特定の表現を意図的に除外します。"
+    "これにより、ラベル付け・比較・意図しない判断を防ぎます。"
+)
+
+with st.expander("Not Permitted Within the Framework", expanded=True):
+    if get_lang() == "English":
+        st.markdown(
+            "- Brain imagery\n"
+            "- Human figures or faces\n"
+            "- Diagnostic icons or medical symbols\n"
+            "- Labels associated with disability or assessment\n"
+            "- Arrows indicating “improvement,” “correction,” or progression\n"
+            "- Visuals implying normal / abnormal distinctions"
+        )
+    else:
+        st.markdown(
+            "- 脳のイメージ\n"
+            "- 人物（顔を含む）\n"
+            "- 診断アイコン／医療シンボル\n"
+            "- 障害や評価・判定を連想させるラベル\n"
+            "- 「改善」「矯正」「進歩」を示す矢印\n"
+            "- 正常／異常の区別を示唆する表現"
+        )
+
+with st.expander("Rationale", expanded=False):
+    if get_lang() == "English":
+        st.markdown(
+            "These elements may:\n"
+            "- introduce clinical or diagnostic associations\n"
+            "- suggest deficit-based thinking\n"
+            "- create unintended hierarchy or comparison\n"
+            "- reduce emotional safety in communication\n\n"
+            "Their exclusion supports neutral, culturally responsive communication."
+        )
+    else:
+        st.markdown(
+            "これらの要素は次のリスクがあります：\n"
+            "- 臨床／診断の連想を生む\n"
+            "- 欠如ベースの見方につながる\n"
+            "- 意図しない序列化や比較を生む\n"
+            "- 対話の心理的安全性を下げる\n\n"
+            "除外することで、中立で文化応答的なコミュニケーションを守ります。"
+        )
+
+with st.expander("Design Boundary (applies across formats)", expanded=False):
+    if get_lang() == "English":
+        st.markdown(
+            "These exclusions apply across:\n"
+            "- app screens\n"
+            "- narrative cards\n"
+            "- posters\n"
+            "- printed materials\n"
+            "- visual tools\n\n"
+            "Consistency ensures the framework remains emotionally safe and non-stigmatizing."
+        )
+    else:
+        st.markdown(
+            "この除外は次の媒体すべてに適用します：\n"
+            "- アプリ画面\n"
+            "- ナラティブカード\n"
+            "- ポスター\n"
+            "- 印刷物\n"
+            "- 視覚ツール\n\n"
+            "一貫性によって、心理的安全性と非スティグマ性を保ちます。"
+        )
+
+st.info(
+    "Summary: Exclusions are protective boundaries that preserve the framework’s intent and integrity."
+    if get_lang() == "English"
+    else
+    "まとめ：除外項目は“制限”ではなく、意図と一貫性を守るための保護的な境界です。"
+)
+
+exclusions_md = """# Explicit Exclusions
+
+Certain visual elements are intentionally excluded to protect the framework’s non-clinical, non-evaluative positioning.
+These exclusions help prevent labeling, comparison, or unintended judgment.
+
+## Not Permitted Within the Framework
+Do not use:
+- Brain imagery
+- Human figures or faces
+- Diagnostic icons or medical symbols
+- Labels associated with disability or assessment
+- Arrows indicating “improvement,” “correction,” or progression
+- Visuals implying normal / abnormal distinctions
+
+## Rationale
+These elements may:
+- introduce clinical or diagnostic associations
+- suggest deficit-based thinking
+- create unintended hierarchy or comparison
+- reduce emotional safety in communication
+
+Their exclusion supports neutral, culturally responsive communication.
+
+## Design Boundary
+These exclusions apply across all formats:
+- app screens
+- narrative cards
+- posters
+- printed materials
+- visual tools
+
+Consistency ensures the framework remains emotionally safe and non-stigmatizing.
+
+## Summary
+Exclusions are protective boundaries that preserve the framework’s intent and integrity.
+"""
+
+st.download_button(
+    label="Download Explicit Exclusions" if get_lang() == "English" else "除外項目をダウンロード",
+    data=exclusions_md.encode("utf-8"),
+    file_name="explicit_exclusions.md",
+    mime="text/markdown",
+)
 
