@@ -46,5 +46,3 @@ st.markdown(
     "- We can take this step by step.\n"
     "- Our goal is for ○○ to feel comfortable and supported."
 )
-
-st.caption("Source: DOTS toolkit layout. :contentReference[oaicite:2]{index=2}")
