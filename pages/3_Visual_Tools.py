@@ -154,4 +154,210 @@ st.download_button(
     file_name="color_guidelines.md",
     mime="text/markdown",
 )
+# --- NEW: Typography section (Design Language) ---
+st.subheader("Typography" if get_lang() == "English" else "タイポグラフィ")
+
+st.write(
+    "Typography is designed to support clarity, emotional safety, and cultural neutrality. "
+    "Fonts are chosen to reduce cognitive load and avoid an authoritative or clinical tone."
+    if get_lang() == "English"
+    else
+    "タイポグラフィは、明確さ・心理的安全性・文化的中立性を支えるために設計します。"
+    "認知負荷を下げ、権威的／臨床的な印象を避けるフォントを選びます。"
+)
+
+with st.expander("Primary Typeface (Neutral Sans-Serif)", expanded=True):
+    if get_lang() == "English":
+        st.markdown(
+            "- Recommended fonts:\n"
+            "  - **English:** Inter / Source Sans 3\n"
+            "  - **Japanese:** Noto Sans JP\n\n"
+            "These fonts are:\n"
+            "- highly legible at small sizes\n"
+            "- visually calm and non-decorative\n"
+            "- suitable for educational and professional contexts"
+        )
+    else:
+        st.markdown(
+            "- 推奨フォント：\n"
+            "  - **英語:** Inter / Source Sans 3\n"
+            "  - **日本語:** Noto Sans JP\n\n"
+            "これらのフォントは：\n"
+            "- 小さなサイズでも読みやすい\n"
+            "- 落ち着いた印象で装飾性が低い\n"
+            "- 教育・プロフェッショナル環境に適している"
+        )
+
+with st.expander("Text Hierarchy", expanded=False):
+    if get_lang() == "English":
+        st.markdown(
+            "**Section Headings**\n"
+            "- Font: Neutral Sans-Serif (**Bold**)\n"
+            "- Usage: Section titles, card titles, screen headers\n"
+            "- Tone: Calm emphasis, not instructional\n"
+            "- Example: *Conversation Support*\n\n"
+            "**Sub-Headings**\n"
+            "- Font: Neutral Sans-Serif (Regular)\n"
+            "- Usage: Labels, short descriptors, categories\n"
+            "- Tone: Supportive, non-directive\n"
+            "- Example: *Context: Talking with parents*\n\n"
+            "**Body Text**\n"
+            "- Font: Neutral Sans-Serif (Regular)\n"
+            "- Usage: Phrases, guidance text, narratives\n"
+            "- Tone: Gentle, explanatory, non-judgmental\n"
+            "- Example: “There are situations where learning feels easier, and others where it feels more challenging.”\n\n"
+            "**Notes / Captions**\n"
+            "- Font: Neutral Sans-Serif (Regular)\n"
+            "- Usage: Short reminders, clarifications\n"
+            "- Tone: Reassuring, optional\n"
+            "- Example: *This is not about diagnosis or labels.*"
+        )
+    else:
+        st.markdown(
+            "**セクション見出し**\n"
+            "- フォント：Neutral Sans-Serif（**太字**）\n"
+            "- 用途：セクションタイトル、カードタイトル、画面ヘッダー\n"
+            "- トーン：落ち着いた強調（指示的にしない）\n"
+            "- 例：*Conversation Support*\n\n"
+            "**サブ見出し**\n"
+            "- フォント：Neutral Sans-Serif（標準）\n"
+            "- 用途：ラベル、短い説明、カテゴリ\n"
+            "- トーン：支援的（誘導しない）\n"
+            "- 例：*Context: Talking with parents*\n\n"
+            "**本文**\n"
+            "- フォント：Neutral Sans-Serif（標準）\n"
+            "- 用途：フレーズ、ガイダンス文、ナラティブ\n"
+            "- トーン：やさしく説明的（判断しない）\n"
+            "- 例：「学びやすい場面もあれば、難しく感じる場面もあります。」\n\n"
+            "**注記／キャプション**\n"
+            "- フォント：Neutral Sans-Serif（標準）\n"
+            "- 用途：短いリマインド、補足\n"
+            "- トーン：安心できる（任意）\n"
+            "- 例：*This is not about diagnosis or labels.*"
+        )
+
+with st.expander("Typography Rules", expanded=False):
+    if get_lang() == "English":
+        st.markdown(
+            "- No decorative or display fonts in communication content\n"
+            "- No italics for emphasis\n"
+            "- Limited use of bold (headings only)\n"
+            "- Line spacing should feel open and breathable\n"
+            "- Text should never feel crowded or dense\n"
+            "- Typography should support the message, not draw attention to itself"
+        )
+    else:
+        st.markdown(
+            "- 装飾的／ディスプレイ系フォントは使用しない\n"
+            "- 強調のためのイタリックは使用しない\n"
+            "- 太字は見出しのみ（使いすぎない）\n"
+            "- 行間は開放的で息ができる感覚に\n"
+            "- 文字が詰まって見えないようにする\n"
+            "- タイポグラフィは主張せず、メッセージを支える"
+        )
+
+with st.expander("What Not to Use", expanded=False):
+    if get_lang() == "English":
+        st.markdown(
+            "- Script or handwritten fonts\n"
+            "- Display fonts (e.g., Boston Angel) in body text\n"
+            "- Fonts associated with diagnosis, instruction, or authority\n\n"
+            "These are excluded to maintain emotional safety and neutrality."
+        )
+    else:
+        st.markdown(
+            "- 筆記体／手書き風フォント\n"
+            "- 本文でのディスプレイフォント（例：Boston Angel）\n"
+            "- 診断・指示・権威を連想させるフォント\n\n"
+            "心理的安全性と中立性を守るため、これらは除外します。"
+        )
+
+with st.expander("Accessibility Notes", expanded=False):
+    if get_lang() == "English":
+        st.markdown(
+            "- Text must remain readable on light pastel backgrounds\n"
+            "- Meaning should never rely on font weight or style alone\n"
+            "- Font size should support quick reading in school environments"
+        )
+    else:
+        st.markdown(
+            "- 淡いパステル背景でも可読性を確保する\n"
+            "- 太さやスタイルだけに意味を依存させない\n"
+            "- 学校環境で“ぱっと読める”サイズにする"
+        )
+
+st.info(
+    "Summary: Typography is functional, calm, and inclusive—part of the communication system, not a stylistic choice."
+    if get_lang() == "English"
+    else
+    "まとめ：タイポグラフィは機能的で落ち着きがあり、インクルーシブ。装飾ではなく、コミュニケーションの一部です。"
+)
+
+# Download button
+typography_md = """# Typography Guidelines
+
+Typography supports clarity, emotional safety, and cultural neutrality.
+Fonts are chosen to reduce cognitive load and avoid authoritative or clinical tone.
+
+## Primary Typeface (Neutral Sans-Serif)
+Recommended fonts:
+- English: Inter / Source Sans 3
+- Japanese: Noto Sans JP
+
+These fonts are:
+- highly legible at small sizes
+- visually calm and non-decorative
+- suitable for educational and professional contexts
+
+## Text Hierarchy
+### Section Headings
+- Font: Neutral Sans-Serif (Bold)
+- Usage: Section titles, card titles, screen headers
+- Tone: Calm emphasis, not instructional
+
+### Sub-Headings
+- Font: Neutral Sans-Serif (Regular)
+- Usage: Labels, short descriptors, categories
+- Tone: Supportive, non-directive
+
+### Body Text
+- Font: Neutral Sans-Serif (Regular)
+- Usage: Phrases, guidance text, narratives
+- Tone: Gentle, explanatory, non-judgmental
+
+### Notes / Captions
+- Font: Neutral Sans-Serif (Regular)
+- Usage: Short reminders, clarifications
+- Tone: Reassuring, optional
+
+## Typography Rules
+- No decorative or display fonts in communication content
+- No italics for emphasis
+- Limited use of bold (headings only)
+- Line spacing should feel open and breathable
+- Text should never feel crowded or dense
+- Typography should support the message, not draw attention to itself
+
+## What Not to Use
+- Script or handwritten fonts
+- Display fonts (e.g., Boston Angel) in body text
+- Fonts associated with diagnosis, instruction, or authority
+
+These are excluded to maintain emotional safety and neutrality.
+
+## Accessibility Notes
+- Text must remain readable on light pastel backgrounds
+- Meaning should never rely on font weight or style alone
+- Font size should support quick reading in school environments
+
+## Summary
+Typography is functional, calm, and inclusive. It is part of the communication system, not a stylistic choice.
+"""
+
+st.download_button(
+    label="Download Typography Guidelines" if get_lang() == "English" else "タイポグラフィガイドラインをダウンロード",
+    data=typography_md.encode("utf-8"),
+    file_name="typography_guidelines.md",
+    mime="text/markdown",
+)
 
