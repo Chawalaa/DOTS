@@ -12,11 +12,11 @@ st.subheader("Quick actions" if get_lang() == "English" else "クイックアク
 c1, c2, c3 = st.columns(3)
 
 with c1:
-    st.page_link("pages/4_Guides.py", label="I’m talking to parents" if get_lang()=="English" else "保護者と話す", icon="👪")
+    st.page_link("pages/4_Guides.py", label="I’m talking to parents" if get_lang()=="English" else "保護者と話す",)
 with c2:
-    st.page_link("pages/4_Guides.py", label="I’m talking to students" if get_lang()=="English" else "生徒と話す", icon="🧒")
+    st.page_link("pages/4_Guides.py", label="I’m talking to students" if get_lang()=="English" else "生徒と話す",)
 with c3:
-    st.page_link("pages/4_Guides.py", label="I’m talking to colleagues" if get_lang()=="English" else "同僚と話す", icon="🤝")
+    st.page_link("pages/4_Guides.py", label="I’m talking to colleagues" if get_lang()=="English" else "同僚と話す",)
 
 st.divider()
 
