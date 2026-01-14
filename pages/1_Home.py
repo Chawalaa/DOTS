@@ -29,5 +29,3 @@ with q2:
 with q3:
     st.page_link("pages/4_Guides.py", label="View conversation guides" if get_lang()=="English" else "会話ガイドを見る", icon="🧭")
 
-st.caption("Content structure based on your DOTS toolkit layout. :contentReference[oaicite:1]{index=1}")
-
