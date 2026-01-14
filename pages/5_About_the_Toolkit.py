@@ -28,5 +28,3 @@ st.warning(
     if get_lang()=="English" else
     "免責事項：本ツールキットは診断や医療目的のツールではありません。個人を評価・ラベル付け・分類しません。目的は対話と理解の支援です。"
 )
-
-st.caption("Source: DOTS toolkit layout. :contentReference[oaicite:5]{index=5}")
