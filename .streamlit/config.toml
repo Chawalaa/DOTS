@@ -1,0 +1,17 @@
+[client]
+showSidebarNavigation = true
+
+[theme]
+base = "light"
+
+[ui]
+hideTopBar = false
+
+[browser]
+gatherUsageStats = false
+
+[server]
+headless = true
+
+[navigation]
+menuTitle = "Menu"
