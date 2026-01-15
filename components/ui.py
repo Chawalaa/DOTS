@@ -5,7 +5,11 @@ LANG_JA = "日本語"
 
 TEXT = {
     "toggle_label": {LANG_EN: "Language", LANG_JA: "言語"},
-    "home_title": {LANG_EN: "Neurodiversity Communication Toolkit", LANG_JA: "ニューロダイバーシティ・コミュニケーション ツールキット"},
+    "menu_title": {LANG_EN: "Menu", LANG_JA: "メニュー"},
+    "home_title": {
+        LANG_EN: "Neurodiversity Communication Toolkit",
+        LANG_JA: "ニューロダイバーシティ・コミュニケーション ツールキット",
+    },
     "home_subtitle": {
         LANG_EN: "Support for gentle, clear conversations about neurodiversity in Japanese educational contexts.",
         LANG_JA: "日本の教育現場におけるニューロダイバーシティをめぐる、やさしく明確な対話を支えるツールです。",
@@ -24,33 +28,65 @@ TEXT = {
             "対話がより明確で、ストレスの少ないものになるよう助けます。"
         ),
     },
-    "menu_title": {LANG_EN: "Menu", LANG_JA: "メニュー"},
 }
 
+
 def get_lang() -> str:
+    """Return current language (defaults to English)."""
     if "lang" not in st.session_state:
         st.session_state.lang = LANG_EN
     return st.session_state.lang
 
+
 def t(key: str) -> str:
+    """Translate a key based on current language."""
     lang = get_lang()
     if key not in TEXT:
         return key
     return TEXT[key].get(lang, TEXT[key].get(LANG_EN, key))
 
-def sidebar_menu_header():
+
+def set_sidebar_branding(title: str | None = None):
     """
-    Adds a friendly 'Menu' label above the page navigation.
-    Streamlit's built-in page list renders above other sidebar elements,
-    so we show this header inside the sidebar to make navigation clearer.
+    Option A:
+    - Hides Streamlit's built-in sidebar nav header ("app")
+    - Inserts our own title at the very top of the sidebar (e.g., "Menu")
+    Call this near the top of every page BEFORE adding other sidebar widgets.
     """
-    st.sidebar.markdown(f"### {t('menu_title')}")
+    if title is None:
+        title = t("menu_title")
+
+    st.markdown(
+        """
+        <style>
+        /* Hide Streamlit's default 'app' label (nav header) */
+        [data-testid="stSidebarNav"] > div:first-child {
+            display: none;
+        }
+
+        /* Make our custom title look like a native header */
+        .custom-menu-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin: 8px 0 10px 0;
+            opacity: 0.85;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    st.sidebar.markdown(
+        f'<div class="custom-menu-title">{title}</div>',
+        unsafe_allow_html=True,
+    )
+
 
 def language_toggle(sidebar: bool = True) -> str:
-    """Put a language selector in sidebar by default."""
-    # Add the Menu label near the top
-    sidebar_menu_header()
-
+    """
+    Language selector.
+    IMPORTANT: Call set_sidebar_branding() before this to ensure "Menu" appears above pages.
+    """
     container = st.sidebar if sidebar else st
     current = get_lang()
     options = [LANG_JA, LANG_EN]  # show JA first
@@ -65,6 +101,14 @@ def language_toggle(sidebar: bool = True) -> str:
     )
     st.session_state.lang = selected
     return selected
+
+
+def page_header(title: str, subtitle: str | None = None):
+    """Simple consistent page header."""
+    st.title(title)
+    if subtitle:
+        st.caption(subtitle)
+    st.divider()
 
 def page_header(title: str, subtitle: str | None = None):
     st.title(title)
