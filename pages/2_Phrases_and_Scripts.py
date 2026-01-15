@@ -52,7 +52,7 @@ import streamlit as st
 st.divider()
 st.subheader("Conversation Support Card" if get_lang() == "English" else "会話サポートカード")
 
-pdf_path = Path("assets/Conversation Support Card.pdf")
+pdf_path = Path("assets/Conversation Support Card .pdf")
 
 if pdf_path.exists():
     pdf_bytes = pdf_path.read_bytes()
@@ -89,7 +89,7 @@ if pdf_path.exists():
 
     # TODO: Replace this with your raw GitHub URL:
     # Example format:
-    # https://raw.githubusercontent.com/<USERNAME>/<REPO>/main/assets/Conversation%20Support%20Card.pdf
+    # https://raw.githubusercontent.com/<USERNAME>/<REPO>/main/assets/Conversation%20Support%20Card .pdf
     pdf_url = "PASTE_YOUR_RAW_GITHUB_PDF_URL_HERE"
 
     if hasattr(st, "link_button"):
@@ -105,8 +105,8 @@ if pdf_path.exists():
 
 else:
     st.error(
-        "PDF not found: assets/Conversation Support Card.pdf. Make sure the filename (including spaces) matches exactly in GitHub."
+        "PDF not found: assets/Conversation Support Card .pdf. Make sure the filename (including spaces) matches exactly in GitHub."
         if get_lang() == "English"
         else
-        "PDFが見つかりません：assets/Conversation Support Card.pdf（スペースを含むファイル名がGitHub上と完全一致しているか確認してください）"
+        "PDFが見つかりません：assets/Conversation Support Card .pdf（スペースを含むファイル名がGitHub上と完全一致しているか確認してください）"
     )
