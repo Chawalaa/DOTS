@@ -15,7 +15,7 @@ except Exception:
 # Your Google Form URL (expanded from your short forms.gle link)
 FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLScifOKrnjNajCSDbCwWBGdaw8HfZzH5lEaz9qZY5BZtysfJ_w/viewform?usp=send_form"
 
-st.set_page_config(page_title="Feedback Tool", page_icon="📝", layout="wide")
+st.set_page_config(page_title="Feedback Tool", layout="wide")
 
 if language_toggle:
     language_toggle(sidebar=True)
