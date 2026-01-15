@@ -67,7 +67,7 @@ if pdf_path.exists():
     # View (opens in new tab) — reliable in Chrome
     if hasattr(st, "link_button"):
         st.link_button(
-            "View Conversation Support Card (PDF)"
+            "View Conversation Support Card"
             if get_lang() == "English"
             else "会話サポートカード（PDF）を表示",
             pdf_url,
