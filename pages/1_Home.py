@@ -1,10 +1,6 @@
 import streamlit as st
 from components.ui import set_sidebar_branding, language_toggle
 
-set_sidebar_branding("Menu")
-language_toggle(sidebar=True)
-
-
 st.set_page_config(page_title="Home", layout="wide")
 
 language_toggle(sidebar=True)
