@@ -53,7 +53,7 @@ import streamlit as st
 st.divider()
 st.subheader("Conversation Support Card" if get_lang() == "English" else "会話サポートカード")
 
-pdf_path = Path("assets/Conversation Support Card.pdf")
+pdf_path = Path("assets/Conversation Support Card .pdf")
 
 if pdf_path.exists():
     pdf_bytes = pdf_path.read_bytes()
@@ -82,14 +82,14 @@ if pdf_path.exists():
         if get_lang() == "English"
         else "会話サポートカード（PDF）をダウンロード",
         data=pdf_bytes,
-        file_name="Conversation Support Card.pdf",
+        file_name="Conversation Support Card .pdf",
         mime="application/pdf",
         use_container_width=True,
     )
 else:
     st.error(
-        "PDF not found: assets/Conversation Support Card.pdf. Make sure the filename (including spaces) matches exactly in GitHub."
+        "PDF not found: assets/Conversation Support Card .pdf. Make sure the filename (including spaces) matches exactly in GitHub."
         if get_lang() == "English"
-        else "PDFが見つかりません：assets/Conversation Support Card.pdf（スペースを含むファイル名がGitHub上と完全一致しているか確認してください）"
+        else "PDFが見つかりません：assets/Conversation Support Card .pdf（スペースを含むファイル名がGitHub上と完全一致しているか確認してください）"
     )
 
