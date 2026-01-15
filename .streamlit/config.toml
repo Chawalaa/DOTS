@@ -1,17 +1,15 @@
-[client]
-showSidebarNavigation = true
-
 [theme]
-base = "light"
+# Pastel accent (Soft blue)
+primaryColor = "#8FB9FF"
 
-[ui]
-hideTopBar = false
+# App background (very light warm-white)
+backgroundColor = "#FFFDF8"
 
-[browser]
-gatherUsageStats = false
+# Sidebar + containers background (very light pastel)
+secondaryBackgroundColor = "#F3F7FF"
 
-[server]
-headless = true
+# Text
+textColor = "#2B2B2B"
 
-[navigation]
-menuTitle = "Menu"
+# Font
+font = "sans serif"
