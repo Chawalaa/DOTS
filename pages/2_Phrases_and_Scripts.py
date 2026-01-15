@@ -1,7 +1,7 @@
 import streamlit as st
 from components.ui import language_toggle, get_lang, page_header
 
-st.set_page_config(page_title="Phrases & Scripts", page_icon="🗣️", layout="wide")
+st.set_page_config(page_title="Phrases & Scripts", layout="wide")
 language_toggle(sidebar=True)
 
 page_header(
@@ -47,49 +47,66 @@ st.markdown(
     "- Our goal is for ○○ to feel comfortable and supported."
 )
 from pathlib import Path
-import base64
 import streamlit as st
 
 st.divider()
 st.subheader("Conversation Support Card" if get_lang() == "English" else "会話サポートカード")
 
-pdf_path = Path("assets/Conversation Support Card .pdf")
+pdf_path = Path("assets/Conversation Support Card.pdf")
 
 if pdf_path.exists():
     pdf_bytes = pdf_path.read_bytes()
 
-    # --- View (embed preview) ---
     st.caption(
-        "View the PDF in the app, or download it below."
+        "View or download the PDF below."
         if get_lang() == "English"
-        else "アプリ内でPDFを表示するか、下からダウンロードできます。"
+        else "PDFは下から表示またはダウンロードできます。"
     )
 
-    b64 = base64.b64encode(pdf_bytes).decode("utf-8")
-    components_html = f"""
-        <iframe
-            src="data:application/pdf;base64,{b64}"
-            width="100%"
-            height="700"
-            style="border: none;"
-        ></iframe>
-    """
-    st.markdown(components_html, unsafe_allow_html=True)
-
-    # --- Download button ---
+    # 1) Download (always works)
     st.download_button(
         label="Download Conversation Support Card (PDF)"
         if get_lang() == "English"
         else "会話サポートカード（PDF）をダウンロード",
         data=pdf_bytes,
-        file_name="Conversation Support Card .pdf",
+        file_name="Conversation Support Card.pdf",
         mime="application/pdf",
         use_container_width=True,
     )
-else:
-    st.error(
-        "PDF not found: assets/Conversation Support Card .pdf. Make sure the filename (including spaces) matches exactly in GitHub."
+
+    # 2) View (open in new tab) — safest
+    # Streamlit can serve static files if you place them in /static or use st.link_button to the GitHub raw link.
+    # Easiest reliable method on Community Cloud: link to the GitHub "raw" file.
+    #
+    # 👉 Replace the URL below with your own repo raw URL once you confirm your repo name.
+    st.info(
+        "To view the PDF: click the button below (opens in a new tab). "
+        "This avoids Chrome blocking embedded PDF previews."
         if get_lang() == "English"
-        else "PDFが見つかりません：assets/Conversation Support Card .pdf（スペースを含むファイル名がGitHub上と完全一致しているか確認してください）"
+        else
+        "PDFを表示するには、下のボタンをクリック（新しいタブで開きます）。Chromeの埋め込みブロックを回避できます。"
     )
 
+    # TODO: Replace this with your raw GitHub URL:
+    # Example format:
+    # https://raw.githubusercontent.com/<USERNAME>/<REPO>/main/assets/Conversation%20Support%20Card.pdf
+    pdf_url = "PASTE_YOUR_RAW_GITHUB_PDF_URL_HERE"
+
+    if hasattr(st, "link_button"):
+        st.link_button(
+            "View Conversation Support Card (PDF)"
+            if get_lang() == "English"
+            else "会話サポートカード（PDF）を表示",
+            pdf_url,
+            use_container_width=True,
+        )
+    else:
+        st.markdown(f"[View Conversation Support Card (PDF)]({pdf_url})")
+
+else:
+    st.error(
+        "PDF not found: assets/Conversation Support Card.pdf. Make sure the filename (including spaces) matches exactly in GitHub."
+        if get_lang() == "English"
+        else
+        "PDFが見つかりません：assets/Conversation Support Card.pdf（スペースを含むファイル名がGitHub上と完全一致しているか確認してください）"
+    )
