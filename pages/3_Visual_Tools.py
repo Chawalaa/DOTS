@@ -356,7 +356,7 @@ with st.expander("Accessibility Notes", expanded=False):
         )
 
 st.info(
-    "Summary: Typography is functional, calm, and inclusive—part of the communication system, not a stylistic choice."
+    "Summary: Typography is functional, calm, and inclusive; part of the communication system, not a stylistic choice."
     if get_lang() == "English"
     else
     "まとめ：タイポグラフィは機能的で落ち着きがあり、インクルーシブ。装飾ではなく、コミュニケーションの一部です。"
@@ -463,56 +463,6 @@ st.info(
     if get_lang() == "English"
     else
     "まとめ：レイアウトは抑制・明確さ・実用性を重視し、ツールが“負担”ではなく“支え”として機能するようにします。"
-)
-
-layout_md = """# Layout & Material Rules
-
-Layout and material choices support clarity, calm attention, and ease of use.
-The framework prioritizes layouts that can be consulted quickly in real-world educational settings.
-
-## Layout Principles
-- Use generous margins and white space
-- Avoid dense or cluttered layouts
-- Maintain clear visual hierarchy
-- Allow content to breathe
-- Layouts should feel open, calm, and approachable
-
-## Content Focus
-- One main idea per card or screen
-- Avoid combining multiple instructions or messages
-- Break information into short, digestible units
-- Supports quick understanding and reduces cognitive load
-
-## Suitable Formats
-- A6 narrative cards
-- Quick-reference guides
-- Mobile-first app screens
-
-These formats reflect how educators access information during daily practice.
-
-## Interaction Philosophy
-- Layouts are designed to be consulted, not studied
-- Content should be readable at a glance
-- Users should not need extended attention or explanation
-- Tools should support, not interrupt, communication
-
-## Consistency Across Materials
-Keep layout rules consistent across:
-- printed cards
-- app screens
-- visual tools
-
-Consistency supports familiarity and emotional safety over time.
-
-## Summary
-Layout emphasizes restraint, clarity, and usability, ensuring tools remain supportive rather than demanding.
-"""
-
-st.download_button(
-    label="Download Layout & Material Rules" if get_lang() == "English" else "レイアウト／素材ルールをダウンロード",
-    data=layout_md.encode("utf-8"),
-    file_name="layout_material_rules.md",
-    mime="text/markdown",
 )
 
 st.divider()
