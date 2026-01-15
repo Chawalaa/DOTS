@@ -11,40 +11,132 @@ page_header(
     else "ラベルなしで理解を助けるメタファーとデザイン指針。",
 )
 
+from pathlib import Path
+import streamlit as st
+
+# --- Visual Metaphors (structured like Color Guidelines + PDF downloads) ---
+st.subheader("Visual Metaphors" if get_lang() == "English" else "ビジュアル・メタファー")
+
 st.write(
-    "Some ideas are easier to understand through simple metaphors rather than explanations."
+    "These metaphors help communicate neurodiversity in a calm, non-clinical, and non-hierarchical way. "
+    "They support understanding without labels, diagnosis language, or comparison."
     if get_lang() == "English"
-    else "説明よりも、シンプルなメタファーの方が理解しやすい場合があります。"
+    else
+    "これらのメタファーは、ニューロダイバーシティを落ち着いて、非臨床的かつ非階層的に伝えるためのものです。"
+    "ラベルや診断的な言葉、比較を避けながら理解を支えます。"
 )
 
 st.divider()
 
-# --- Narrative tools (your existing content) ---
-with st.expander("Different dots, different strengths", expanded=True):
+def pdf_download_button(label_en: str, label_ja: str, pdf_filename: str):
+    """Reusable PDF download button for assets/ PDFs (supports spaces in filenames)."""
+    pdf_path = Path("assets") / pdf_filename
+    if pdf_path.exists():
+        st.download_button(
+            label=label_en if get_lang() == "English" else label_ja,
+            data=pdf_path.read_bytes(),
+            file_name=pdf_filename,
+            mime="application/pdf",
+            use_container_width=True,
+        )
+    else:
+        st.error(
+            f"PDF not found: assets/{pdf_filename}. Upload it to your GitHub repo under assets/."
+            if get_lang() == "English"
+            else f"PDFが見つかりません：assets/{pdf_filename} をGitHubの assets/ にアップロードしてください。"
+        )
+
+# --- Dots ---
+with st.expander("Dots Narrative" if get_lang() == "English" else "Dots（ドット）ナラティブ", expanded=True):
     st.write(
-        "Everyone is made up of many dots.\n\n"
-        "Some dots are bright, some are quiet, and some take time to appear.\n\n"
-        "When dots are arranged differently, they create different patterns.\n\n"
-        "Neurodiversity means that everyone’s pattern is unique, and all patterns have value."
+        "A gentle metaphor for diversity as different “dots” that form unique patterns—"
+        "emphasizing variation without ranking or evaluation."
+        if get_lang() == "English"
+        else
+        "多様性を「異なるドットが形づくるユニークなパターン」として捉える、やさしいメタファーです。"
+        "優劣や評価を含まず、違いをそのまま尊重します。"
     )
 
-with st.expander("Different waves, different rhythms", expanded=False):
-    st.write(
-        "Some people move like gentle waves, others like strong waves.\n\n"
-        "Some waves need calm space, while others enjoy movement.\n\n"
-        "Learning and communication also have rhythms.\n\n"
-        "Neurodiversity means respecting different rhythms, not forcing one pattern."
+    st.markdown(
+        "- **Use when:** introducing neurodiversity without labels\n"
+        "- **Supports:** emotional safety, curiosity, shared understanding\n"
+        "- **Avoids:** “normal/abnormal” framing, clinical imagery"
+        if get_lang() == "English"
+        else
+        "- **使う場面：** ラベルを使わずにニューロダイバーシティを紹介したいとき\n"
+        "- **支えるもの：** 心理的安全性、好奇心、共通理解\n"
+        "- **避けるもの：** 正常／異常の枠組み、臨床的イメージ"
     )
 
-with st.expander("Different paths to the same place", expanded=False):
-    st.write(
-        "People take different paths when they learn or communicate.\n\n"
-        "Some paths are straight; others have curves or pauses.\n\n"
-        "Taking a different path does not mean being lost.\n\n"
-        "Neurodiversity means allowing different paths to reach understanding."
+    pdf_download_button(
+        label_en="Download Dots Narrative (PDF)",
+        label_ja="Dots ナラティブ（PDF）をダウンロード",
+        pdf_filename="Dots Narrative.pdf",
     )
 
-st.divider()
+# --- Waves ---
+with st.expander("Waves Narrative" if get_lang() == "English" else "Waves（波）ナラティブ", expanded=False):
+    st.write(
+        "A metaphor for different rhythms and intensity in communication and learning—"
+        "supporting the idea that people regulate and respond differently."
+        if get_lang() == "English"
+        else
+        "コミュニケーションや学びの「リズムや強さの違い」を波として表すメタファーです。"
+        "人それぞれ調整や反応の仕方が違うことを自然に伝えます。"
+    )
+
+    st.markdown(
+        "- **Use when:** explaining sensory load, pacing, or emotional regulation\n"
+        "- **Supports:** calm reframing, reduced blame, practical adjustments\n"
+        "- **Avoids:** deficit language, correction/improvement framing"
+        if get_lang() == "English"
+        else
+        "- **使う場面：** 感覚負荷、ペース、情動の調整を説明したいとき\n"
+        "- **支えるもの：** 落ち着いた捉え直し、責めない理解、実務的な調整\n"
+        "- **避けるもの：** 欠如表現、矯正／改善の枠組み"
+    )
+
+    pdf_download_button(
+        label_en="Download Waves Narrative (PDF)",
+        label_ja="Waves ナラティブ（PDF）をダウンロード",
+        pdf_filename="Waves Narrative.pdf",
+    )
+
+# --- Pathways ---
+with st.expander("Pathways Narrative" if get_lang() == "English" else "Pathways（道筋）ナラティブ", expanded=False):
+    st.write(
+        "A metaphor for different paths to the same goal—"
+        "highlighting that learning and communication can succeed through multiple routes."
+        if get_lang() == "English"
+        else
+        "「同じ目的でも道筋は一つではない」というメタファーです。"
+        "学びや対話は複数のルートで成立することを示します。"
+    )
+
+    st.markdown(
+        "- **Use when:** discussing support strategies, accommodations, or alternative methods\n"
+        "- **Supports:** collaboration, flexibility, shared problem-solving\n"
+        "- **Avoids:** “one correct way” assumptions"
+        if get_lang() == "English"
+        else
+        "- **使う場面：** 支援方法、合理的配慮、別のやり方を話すとき\n"
+        "- **支えるもの：** 協働、柔軟性、共同での問題解決\n"
+        "- **避けるもの：** 「正しい方法は一つ」という前提"
+    )
+
+    pdf_download_button(
+        label_en="Download Pathways Narrative (PDF)",
+        label_ja="Pathways ナラティブ（PDF）をダウンロード",
+        pdf_filename="Pathways Narrative.pdf",
+    )
+
+st.info(
+    "Tip: These metaphors work best when paired with strengths-based language and non-evaluative phrasing."
+    if get_lang() == "English"
+    else
+    "ヒント：これらのメタファーは、強みベースで評価しない言い回しと組み合わせると最も効果的です。"
+)
+
 
 from pathlib import Path
 import streamlit as st
