@@ -24,6 +24,7 @@ TEXT = {
             "対話がより明確で、ストレスの少ないものになるよう助けます。"
         ),
     },
+    "menu_title": {LANG_EN: "Menu", LANG_JA: "メニュー"},
 }
 
 def get_lang() -> str:
@@ -37,8 +38,19 @@ def t(key: str) -> str:
         return key
     return TEXT[key].get(lang, TEXT[key].get(LANG_EN, key))
 
+def sidebar_menu_header():
+    """
+    Adds a friendly 'Menu' label above the page navigation.
+    Streamlit's built-in page list renders above other sidebar elements,
+    so we show this header inside the sidebar to make navigation clearer.
+    """
+    st.sidebar.markdown(f"### {t('menu_title')}")
+
 def language_toggle(sidebar: bool = True) -> str:
     """Put a language selector in sidebar by default."""
+    # Add the Menu label near the top
+    sidebar_menu_header()
+
     container = st.sidebar if sidebar else st
     current = get_lang()
     options = [LANG_JA, LANG_EN]  # show JA first
