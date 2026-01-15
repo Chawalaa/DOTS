@@ -1,7 +1,7 @@
 import streamlit as st
 from components.ui import language_toggle, get_lang, page_header
 
-st.set_page_config(page_title="Visual Tools", page_icon="🧩", layout="wide")
+st.set_page_config(page_title="Visual Tools", layout="wide")
 language_toggle(sidebar=True)
 
 page_header(
