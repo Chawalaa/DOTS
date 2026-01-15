@@ -46,3 +46,50 @@ st.markdown(
     "- We can take this step by step.\n"
     "- Our goal is for ○○ to feel comfortable and supported."
 )
+from pathlib import Path
+import base64
+import streamlit as st
+
+st.divider()
+st.subheader("Conversation Support Card" if get_lang() == "English" else "会話サポートカード")
+
+pdf_path = Path("assets/Conversation Support Card.pdf")
+
+if pdf_path.exists():
+    pdf_bytes = pdf_path.read_bytes()
+
+    # --- View (embed preview) ---
+    st.caption(
+        "View the PDF in the app, or download it below."
+        if get_lang() == "English"
+        else "アプリ内でPDFを表示するか、下からダウンロードできます。"
+    )
+
+    b64 = base64.b64encode(pdf_bytes).decode("utf-8")
+    components_html = f"""
+        <iframe
+            src="data:application/pdf;base64,{b64}"
+            width="100%"
+            height="700"
+            style="border: none;"
+        ></iframe>
+    """
+    st.markdown(components_html, unsafe_allow_html=True)
+
+    # --- Download button ---
+    st.download_button(
+        label="Download Conversation Support Card (PDF)"
+        if get_lang() == "English"
+        else "会話サポートカード（PDF）をダウンロード",
+        data=pdf_bytes,
+        file_name="Conversation Support Card.pdf",
+        mime="application/pdf",
+        use_container_width=True,
+    )
+else:
+    st.error(
+        "PDF not found: assets/Conversation Support Card.pdf. Make sure the filename (including spaces) matches exactly in GitHub."
+        if get_lang() == "English"
+        else "PDFが見つかりません：assets/Conversation Support Card.pdf（スペースを含むファイル名がGitHub上と完全一致しているか確認してください）"
+    )
+
