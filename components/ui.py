@@ -1,4 +1,5 @@
 import streamlit as st
+from pathlib import Path
 
 LANG_EN = "English"
 LANG_JA = "日本語"
@@ -46,46 +47,132 @@ def t(key: str) -> str:
     return TEXT[key].get(lang, TEXT[key].get(LANG_EN, key))
 
 
-def set_sidebar_branding(title: str | None = None):
+def apply_brand_styles():
     """
-    Option A:
-    - Hides Streamlit's built-in sidebar nav header ("app")
-    - Inserts our own title at the very top of the sidebar (e.g., "Menu")
-    Call this near the top of every page BEFORE adding other sidebar widgets.
+    Applies your calm, pastel design language to the overall app (theme-like CSS layer).
+    Adjust hex values to match your exact palette if needed.
     """
-    if title is None:
-        title = t("menu_title")
-
     st.markdown(
         """
         <style>
-        /* Hide Streamlit's default 'app' label (nav header) */
-        [data-testid="stSidebarNav"] > div:first-child {
-            display: none;
+        :root{
+            --soft-blue: #8FB9FF;
+            --mint-green: #AEEBD5;
+            --peach: #FFC7B2;
+            --lavender: #D9C8FF;
+            --pale-yellow: #FFF1A8;
+
+            --ink: #2B2B2B;
+            --card-bg: rgba(255, 255, 255, 0.78);
+            --border: rgba(50, 50, 50, 0.10);
         }
 
-        /* Make our custom title look like a native header */
+        html, body, [class*="css"]  {
+            color: var(--ink);
+        }
+
+        .block-container {
+            padding-top: 1.2rem;
+        }
+
+        /* Sidebar background: gentle gradient using your palette */
+        [data-testid="stSidebar"] {
+            background: linear-gradient(
+              180deg,
+              rgba(143, 185, 255, 0.18) 0%,
+              rgba(217, 200, 255, 0.14) 45%,
+              rgba(255, 241, 168, 0.10) 100%
+            );
+            border-right: 1px solid var(--border);
+        }
+
+        /* Soft cards / bordered blocks */
+        [data-testid="stVerticalBlockBorderWrapper"] {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            box-shadow: 0 2px 18px rgba(0,0,0,0.04);
+        }
+
+        /* Expanders: calmer hover */
+        details > summary {
+            border-radius: 12px !important;
+        }
+        details > summary:hover {
+            background: rgba(143, 185, 255, 0.10);
+        }
+
+        /* Buttons + download buttons */
+        .stButton > button,
+        .stDownloadButton > button,
+        .stLinkButton > a {
+            border-radius: 12px !important;
+            border: 1px solid rgba(143, 185, 255, 0.35) !important;
+        }
+
+        /* Alerts: gentle look */
+        [data-testid="stAlert"] {
+            border-radius: 14px;
+            border: 1px solid var(--border);
+        }
+
+        /* Our "Menu" header styling */
+        .custom-menu-wrap {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 8px 0 10px 0;
+        }
         .custom-menu-title {
             font-size: 14px;
             font-weight: 600;
-            margin: 8px 0 10px 0;
             opacity: 0.85;
+            line-height: 1.1;
         }
         </style>
         """,
         unsafe_allow_html=True,
     )
 
-    st.sidebar.markdown(
-        f'<div class="custom-menu-title">{title}</div>',
+
+def set_sidebar_branding(title: str | None = None, icon_path: str = "assets/dots.png", icon_width: int = 28):
+    """
+    Option A:
+    - Hides Streamlit's built-in sidebar nav header ("app")
+    - Inserts our own 'Menu' title ABOVE the pages list visually
+    - Optionally shows your dots icon at the very top of the sidebar
+
+    Call this near the top of every page BEFORE adding other sidebar widgets.
+    """
+    if title is None:
+        title = t("menu_title")
+
+    # Hide built-in nav header ("app") — use a couple selectors for robustness
+    st.markdown(
+        """
+        <style>
+        [data-testid="stSidebarNav"] > div:first-child { display: none !important; }
+        [data-testid="stSidebarNav"] header { display: none !important; }
+        </style>
+        """,
         unsafe_allow_html=True,
     )
+
+    # Top branding row: icon + Menu title
+    icon_file = Path(icon_path)
+    if icon_file.exists():
+        col1, col2 = st.sidebar.columns([1, 6])
+        with col1:
+            st.image(str(icon_file), width=icon_width)
+        with col2:
+            st.markdown(f'<div class="custom-menu-title">{title}</div>', unsafe_allow_html=True)
+    else:
+        st.sidebar.markdown(f'<div class="custom-menu-title">{title}</div>', unsafe_allow_html=True)
 
 
 def language_toggle(sidebar: bool = True) -> str:
     """
-    Language selector.
-    IMPORTANT: Call set_sidebar_branding() before this to ensure "Menu" appears above pages.
+    Language selector. Call set_sidebar_branding() before this so Menu + icon appear above pages.
     """
     container = st.sidebar if sidebar else st
     current = get_lang()
@@ -104,87 +191,8 @@ def language_toggle(sidebar: bool = True) -> str:
 
 
 def page_header(title: str, subtitle: str | None = None):
-    """Simple consistent page header."""
+    """Consistent page header."""
     st.title(title)
     if subtitle:
         st.caption(subtitle)
     st.divider()
-
-def page_header(title: str, subtitle: str | None = None):
-    st.title(title)
-    if subtitle:
-        st.caption(subtitle)
-    st.divider()
-import streamlit as st
-
-def apply_brand_styles():
-    # Replace these hex codes with your exact palette if you have it
-    st.markdown(
-        """
-        <style>
-        :root{
-            --soft-blue: #8FB9FF;
-            --mint-green: #AEEBD5;
-            --peach: #FFC7B2;
-            --lavender: #D9C8FF;
-            --pale-yellow: #FFF1A8;
-
-            --ink: #2B2B2B;
-            --card-bg: rgba(255, 255, 255, 0.75);
-            --border: rgba(50, 50, 50, 0.10);
-        }
-
-        /* Softer overall typography */
-        html, body, [class*="css"]  {
-            color: var(--ink);
-        }
-
-        /* Main content container spacing */
-        .block-container {
-            padding-top: 1.2rem;
-        }
-
-        /* Make sidebar feel like part of your design system */
-        [data-testid="stSidebar"] {
-            background: linear-gradient(
-              180deg,
-              rgba(143, 185, 255, 0.18) 0%,
-              rgba(217, 200, 255, 0.14) 45%,
-              rgba(255, 241, 168, 0.10) 100%
-            );
-            border-right: 1px solid var(--border);
-        }
-
-        /* Cards / containers */
-        [data-testid="stVerticalBlockBorderWrapper"] {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            box-shadow: 0 2px 18px rgba(0,0,0,0.04);
-        }
-
-        /* Expanders: calm headers */
-        details > summary {
-            border-radius: 12px !important;
-        }
-        details > summary:hover {
-            background: rgba(143, 185, 255, 0.10);
-        }
-
-        /* Buttons: soft blue, not loud */
-        .stButton > button,
-        .stDownloadButton > button,
-        .stLinkButton > a {
-            border-radius: 12px !important;
-            border: 1px solid rgba(143, 185, 255, 0.35) !important;
-        }
-
-        /* Streamlit info/success/warning boxes — make them gentler */
-        [data-testid="stAlert"] {
-            border-radius: 14px;
-            border: 1px solid var(--border);
-        }
-        </style>
-        """,
-        unsafe_allow_html=True
-    )
