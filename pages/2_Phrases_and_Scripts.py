@@ -80,11 +80,7 @@ if pdf_path.exists():
     #
     # 👉 Replace the URL below with your own repo raw URL once you confirm your repo name.
     st.info(
-        "To view the PDF: click the button below (opens in a new tab). "
-        "This avoids Chrome blocking embedded PDF previews."
-        if get_lang() == "English"
-        else
-        "PDFを表示するには、下のボタンをクリック（新しいタブで開きます）。Chromeの埋め込みブロックを回避できます。"
+        
     )
 
     # TODO: Replace this with your raw GitHub URL:
