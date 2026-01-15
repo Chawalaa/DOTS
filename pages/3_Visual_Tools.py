@@ -469,7 +469,7 @@ st.info(
 st.subheader("Explicit Exclusions" if get_lang() == "English" else "明確な除外項目")
 
 st.write(
-    "Certain visual elements are intentionally excluded to protect the framework’s non-clinical, non-evaluative positioning. "
+    "Certain visual elements are intentionally excluded to protect the framework’s non-clinical, and non-evaluative positioning."
     "These exclusions help prevent labeling, comparison, or unintended judgment."
     if get_lang() == "English"
     else
