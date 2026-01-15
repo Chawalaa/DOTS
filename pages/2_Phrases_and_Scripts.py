@@ -59,7 +59,7 @@ if pdf_path.exists():
     pdf_bytes = pdf_path.read_bytes()
 
     st.caption(
-        "View the PDF in a new tab (recommended), or download it below."
+        "View the card, or download PDF below."
         if get_lang() == "English"
         else "PDFは新しいタブで表示（推奨）するか、下からダウンロードできます。"
     )
