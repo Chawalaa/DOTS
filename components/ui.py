@@ -188,4 +188,9 @@ def apply_brand_styles():
         """,
         unsafe_allow_html=True
     )
+from pathlib import Path
+
+icon = Path("assets/Dots_icon.png")
+if icon.exists():
+    st.sidebar.image(str(icon), width=36)
 
