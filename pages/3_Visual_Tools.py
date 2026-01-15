@@ -465,8 +465,6 @@ st.info(
     "まとめ：レイアウトは抑制・明確さ・実用性を重視し、ツールが“負担”ではなく“支え”として機能するようにします。"
 )
 
-st.divider()
-
 # --- NEW: Explicit Exclusions ---
 st.subheader("Explicit Exclusions" if get_lang() == "English" else "明確な除外項目")
 
@@ -548,47 +546,6 @@ st.info(
     "まとめ：除外項目は“制限”ではなく、意図と一貫性を守るための保護的な境界です。"
 )
 
-exclusions_md = """# Explicit Exclusions
-
-Certain visual elements are intentionally excluded to protect the framework’s non-clinical, non-evaluative positioning.
-These exclusions help prevent labeling, comparison, or unintended judgment.
-
-## Not Permitted Within the Framework
-Do not use:
-- Brain imagery
-- Human figures or faces
-- Diagnostic icons or medical symbols
-- Labels associated with disability or assessment
-- Arrows indicating “improvement,” “correction,” or progression
-- Visuals implying normal / abnormal distinctions
-
-## Rationale
-These elements may:
-- introduce clinical or diagnostic associations
-- suggest deficit-based thinking
-- create unintended hierarchy or comparison
-- reduce emotional safety in communication
-
-Their exclusion supports neutral, culturally responsive communication.
-
-## Design Boundary
-These exclusions apply across all formats:
-- app screens
-- narrative cards
-- posters
-- printed materials
-- visual tools
-
-Consistency ensures the framework remains emotionally safe and non-stigmatizing.
-
-## Summary
-Exclusions are protective boundaries that preserve the framework’s intent and integrity.
-"""
-
-st.download_button(
-    label="Download Explicit Exclusions" if get_lang() == "English" else "除外項目をダウンロード",
-    data=exclusions_md.encode("utf-8"),
-    file_name="explicit_exclusions.md",
     mime="text/markdown",
 )
 
