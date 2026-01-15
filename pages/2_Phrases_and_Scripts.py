@@ -48,37 +48,43 @@ st.markdown(
 )
 from pathlib import Path
 import streamlit as st
+import urllib.parse
 
 st.divider()
 st.subheader("Conversation Support Card" if get_lang() == "English" else "会話サポートカード")
 
-pdf_path = Path("assets/Conversation Support Card .pdf")  # note the space before .pdf matches your repo
-pdf_url = "https://raw.githubusercontent.com/Chawalaa/DOTS/main/assets/Conversation%20Support%20Card%20.pdf"
+# IMPORTANT: your filename has a space before .pdf
+pdf_path = Path("assets/Conversation Support Card .pdf")
+
+raw_pdf_url = "https://raw.githubusercontent.com/Chawalaa/DOTS/main/assets/Conversation%20Support%20Card%20.pdf"
+
+# This viewer URL forces in-browser viewing
+viewer_url = "https://drive.google.com/viewerng/viewer?embedded=true&url=" + urllib.parse.quote(raw_pdf_url, safe="")
 
 if pdf_path.exists():
     pdf_bytes = pdf_path.read_bytes()
 
     st.caption(
-        "View the card, or download PDF below."
+        "View the PDF in a new tab, or download it below."
         if get_lang() == "English"
-        else "PDFは新しいタブで表示（推奨）するか、下からダウンロードできます。"
+        else "PDFは新しいタブで表示するか、下からダウンロードできます。"
     )
 
-    # View (opens in new tab) — reliable in Chrome
+    # View (opens in a viewer tab, not download)
     if hasattr(st, "link_button"):
         st.link_button(
-            "View Conversation Support Card"
+            "View Conversation Support Card (PDF)"
             if get_lang() == "English"
             else "会話サポートカード（PDF）を表示",
-            pdf_url,
+            viewer_url,
             use_container_width=True,
         )
     else:
         st.markdown(
-            f"[{('View Conversation Support Card' if get_lang() == 'English' else '会話サポートカード（PDF）を表示')}]({pdf_url})"
+            f"[{('View Conversation Support Card (PDF)' if get_lang() == 'English' else '会話サポートカード（PDF）を表示')}]({viewer_url})"
         )
 
-    # Download (from your app assets)
+    # Download (from your app assets — always works)
     st.download_button(
         label="Download Conversation Support Card (PDF)"
         if get_lang() == "English"
