@@ -115,3 +115,77 @@ def page_header(title: str, subtitle: str | None = None):
     if subtitle:
         st.caption(subtitle)
     st.divider()
+import streamlit as st
+
+def apply_brand_styles():
+    # Replace these hex codes with your exact palette if you have it
+    st.markdown(
+        """
+        <style>
+        :root{
+            --soft-blue: #8FB9FF;
+            --mint-green: #AEEBD5;
+            --peach: #FFC7B2;
+            --lavender: #D9C8FF;
+            --pale-yellow: #FFF1A8;
+
+            --ink: #2B2B2B;
+            --card-bg: rgba(255, 255, 255, 0.75);
+            --border: rgba(50, 50, 50, 0.10);
+        }
+
+        /* Softer overall typography */
+        html, body, [class*="css"]  {
+            color: var(--ink);
+        }
+
+        /* Main content container spacing */
+        .block-container {
+            padding-top: 1.2rem;
+        }
+
+        /* Make sidebar feel like part of your design system */
+        [data-testid="stSidebar"] {
+            background: linear-gradient(
+              180deg,
+              rgba(143, 185, 255, 0.18) 0%,
+              rgba(217, 200, 255, 0.14) 45%,
+              rgba(255, 241, 168, 0.10) 100%
+            );
+            border-right: 1px solid var(--border);
+        }
+
+        /* Cards / containers */
+        [data-testid="stVerticalBlockBorderWrapper"] {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            box-shadow: 0 2px 18px rgba(0,0,0,0.04);
+        }
+
+        /* Expanders: calm headers */
+        details > summary {
+            border-radius: 12px !important;
+        }
+        details > summary:hover {
+            background: rgba(143, 185, 255, 0.10);
+        }
+
+        /* Buttons: soft blue, not loud */
+        .stButton > button,
+        .stDownloadButton > button,
+        .stLinkButton > a {
+            border-radius: 12px !important;
+            border: 1px solid rgba(143, 185, 255, 0.35) !important;
+        }
+
+        /* Streamlit info/success/warning boxes — make them gentler */
+        [data-testid="stAlert"] {
+            border-radius: 14px;
+            border: 1px solid var(--border);
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
