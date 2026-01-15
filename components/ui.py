@@ -31,26 +31,25 @@ TEXT = {
     },
 }
 
-
+# ---------- Language helpers ----------
 def get_lang() -> str:
-    """Return current language (defaults to English)."""
     if "lang" not in st.session_state:
         st.session_state.lang = LANG_EN
     return st.session_state.lang
 
 
 def t(key: str) -> str:
-    """Translate a key based on current language."""
     lang = get_lang()
     if key not in TEXT:
         return key
     return TEXT[key].get(lang, TEXT[key].get(LANG_EN, key))
 
 
+# ---------- Branding + theme ----------
 def apply_brand_styles():
     """
-    Applies your calm, pastel design language to the overall app (theme-like CSS layer).
-    Adjust hex values to match your exact palette if needed.
+    Global pastel look (safe + calm).
+    This can be called on every page right after st.set_page_config(...).
     """
     st.markdown(
         """
@@ -63,20 +62,16 @@ def apply_brand_styles():
             --pale-yellow: #FFF1A8;
 
             --ink: #2B2B2B;
-            --card-bg: rgba(255, 255, 255, 0.78);
             --border: rgba(50, 50, 50, 0.10);
+            --card-bg: rgba(255, 255, 255, 0.78);
         }
 
-        html, body, [class*="css"]  {
-            color: var(--ink);
-        }
+        html, body, [class*="css"]  { color: var(--ink); }
 
-        .block-container {
-            padding-top: 1.2rem;
-        }
+        .block-container { padding-top: 1.2rem; }
 
-        /* Sidebar background: gentle gradient using your palette */
-        [data-testid="stSidebar"] {
+        /* Sidebar: gentle gradient */
+        [data-testid="stSidebar"]{
             background: linear-gradient(
               180deg,
               rgba(143, 185, 255, 0.18) 0%,
@@ -86,94 +81,76 @@ def apply_brand_styles():
             border-right: 1px solid var(--border);
         }
 
-        /* Soft cards / bordered blocks */
-        [data-testid="stVerticalBlockBorderWrapper"] {
+        /* Cards / bordered sections */
+        [data-testid="stVerticalBlockBorderWrapper"]{
             background: var(--card-bg);
             border: 1px solid var(--border);
             border-radius: 14px;
             box-shadow: 0 2px 18px rgba(0,0,0,0.04);
         }
 
-        /* Expanders: calmer hover */
-        details > summary {
-            border-radius: 12px !important;
-        }
-        details > summary:hover {
-            background: rgba(143, 185, 255, 0.10);
-        }
-
-        /* Buttons + download buttons */
+        /* Buttons */
         .stButton > button,
         .stDownloadButton > button,
-        .stLinkButton > a {
+        .stLinkButton > a{
             border-radius: 12px !important;
-            border: 1px solid rgba(143, 185, 255, 0.35) !important;
+            border: 1px solid rgba(143,185,255,0.35) !important;
         }
 
-        /* Alerts: gentle look */
-        [data-testid="stAlert"] {
-            border-radius: 14px;
-            border: 1px solid var(--border);
-        }
-
-        /* Our "Menu" header styling */
-        .custom-menu-wrap {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin: 8px 0 10px 0;
-        }
-        .custom-menu-title {
-            font-size: 14px;
-            font-weight: 600;
-            opacity: 0.85;
-            line-height: 1.1;
-        }
+        /* Expanders hover */
+        details > summary { border-radius: 12px !important; }
+        details > summary:hover { background: rgba(143,185,255,0.10); }
         </style>
         """,
         unsafe_allow_html=True,
     )
 
 
-def set_sidebar_branding(title: str | None = None, icon_path: str = "assets/dots.png", icon_width: int = 28):
+def set_sidebar_branding(title: str | None = None):
     """
-    Option A:
-    - Hides Streamlit's built-in sidebar nav header ("app")
-    - Inserts our own 'Menu' title ABOVE the pages list visually
-    - Optionally shows your dots icon at the very top of the sidebar
-
-    Call this near the top of every page BEFORE adding other sidebar widgets.
+    Reliable solution on Streamlit Cloud:
+    - Hide the built-in "app" word (nav header)
+    - Inject our own header ABOVE the pages list using CSS pseudo-elements
+    - Uses dot glyphs (•••) as the "dots icon" so it never fails to load
     """
     if title is None:
         title = t("menu_title")
 
-    # Hide built-in nav header ("app") — use a couple selectors for robustness
+    # NOTE: we inject the title value into CSS content (escape quotes)
+    safe_title = title.replace('"', '\\"')
+
     st.markdown(
-        """
+        f"""
         <style>
-        [data-testid="stSidebarNav"] > div:first-child { display: none !important; }
-        [data-testid="stSidebarNav"] header { display: none !important; }
+        /* 1) Hide the default header area that shows 'app' */
+        [data-testid="stSidebarNav"] > div:first-child {{ display: none !important; }}
+        [data-testid="stSidebarNav"] header {{ display: none !important; }}
+        [data-testid="stSidebarNav"] [data-testid="stSidebarNavTitle"] {{ display: none !important; }}
+
+        /* 2) Add our own header ABOVE the pages */
+        [data-testid="stSidebarNav"]::before {{
+            content: "•••  {safe_title}";
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            opacity: 0.90;
+            padding: 10px 12px 6px 12px;
+            margin-top: 2px;
+            color: var(--ink);
+        }}
+
+        /* 3) A little spacing so pages start below our header nicely */
+        [data-testid="stSidebarNav"] {{
+            padding-top: 0px !important;
+        }}
         </style>
         """,
         unsafe_allow_html=True,
     )
 
-    # Top branding row: icon + Menu title
-    icon_file = Path(icon_path)
-    if icon_file.exists():
-        col1, col2 = st.sidebar.columns([1, 6])
-        with col1:
-            st.image(str(icon_file), width=icon_width)
-        with col2:
-            st.markdown(f'<div class="custom-menu-title">{title}</div>', unsafe_allow_html=True)
-    else:
-        st.sidebar.markdown(f'<div class="custom-menu-title">{title}</div>', unsafe_allow_html=True)
 
-
+# ---------- UI building blocks ----------
 def language_toggle(sidebar: bool = True) -> str:
-    """
-    Language selector. Call set_sidebar_branding() before this so Menu + icon appear above pages.
-    """
     container = st.sidebar if sidebar else st
     current = get_lang()
     options = [LANG_JA, LANG_EN]  # show JA first
@@ -191,8 +168,13 @@ def language_toggle(sidebar: bool = True) -> str:
 
 
 def page_header(title: str, subtitle: str | None = None):
-    """Consistent page header."""
     st.title(title)
     if subtitle:
         st.caption(subtitle)
     st.divider()
+
+
+# ---------- Optional: use dots.png as browser tab icon ----------
+def get_app_icon_path(default: str = "assets/Dots_icon.png") -> str | None:
+    p = Path(default)
+    return str(p) if p.exists() else None
