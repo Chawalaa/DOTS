@@ -75,7 +75,7 @@ if pdf_path.exists():
         )
     else:
         st.markdown(
-            f"[{('View Conversation Support Card (PDF)' if get_lang() == 'English' else '会話サポートカード（PDF）を表示')}]({pdf_url})"
+            f"[{('View Conversation Support Card' if get_lang() == 'English' else '会話サポートカード（PDF）を表示')}]({pdf_url})"
         )
 
     # Download (from your app assets)
