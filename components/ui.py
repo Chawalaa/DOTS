@@ -59,5 +59,3 @@ def page_header(title: str, subtitle: str | None = None):
     if subtitle:
         st.caption(subtitle)
     st.divider()
-import streamlit as st
-st.sidebar.markdown("### Menu")
