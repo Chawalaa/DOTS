@@ -1,4 +1,5 @@
 import streamlit as st
+from components.ui import apply_brand_styles, set_sidebar_branding, language_toggle, get_lang, page_header
 import streamlit.components.v1 as components
 from datetime import datetime
 import csv
@@ -16,6 +17,10 @@ except Exception:
 FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLScifOKrnjNajCSDbCwWBGdaw8HfZzH5lEaz9qZY5BZtysfJ_w/viewform?usp=send_form"
 
 st.set_page_config(page_title="Feedback Tool", layout="wide")
+
+# Branding + sidebar
+apply_brand_styles()
+set_sidebar_branding("Menu")
 
 if language_toggle:
     language_toggle(sidebar=True)
