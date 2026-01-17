@@ -7,6 +7,7 @@ language_toggle(sidebar=True)
 # Branding + sidebar
 apply_brand_styles()
 set_sidebar_branding("Menu")
+
 page_header("About This Toolkit" if get_lang()=="English" else "ツールキットについて")
 
 st.write(
