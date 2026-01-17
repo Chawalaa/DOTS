@@ -6,7 +6,6 @@ st.set_page_config(page_title="Home", layout="wide")
 apply_brand_styles()
 set_sidebar_branding("Menu")
 language_toggle(sidebar=True)
-language_toggle(sidebar=True)
 
 page_header(t("home_title"), t("home_subtitle"))
 st.write(t("home_intro"))
