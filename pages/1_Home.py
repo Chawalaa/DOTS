@@ -11,7 +11,7 @@ from components.ui import (
 
 st.set_page_config(
     page_title="Home",
-    page_icon=get_app_icon_path() or "🌿",
+    page_icon=get_app_icon_path() ,
     layout="wide",
 )
 
