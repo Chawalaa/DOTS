@@ -1,7 +1,12 @@
 import streamlit as st
-from components.ui import language_toggle, get_lang, page_header
+from components.ui import apply_brand_styles, set_sidebar_branding, language_toggle, get_lang, page_header
 
 st.set_page_config(page_title="Phrases & Scripts", layout="wide")
+language_toggle(sidebar=True)
+
+# Branding + sidebar
+apply_brand_styles()
+set_sidebar_branding("Menu")
 language_toggle(sidebar=True)
 
 page_header(
