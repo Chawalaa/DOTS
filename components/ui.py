@@ -178,3 +178,79 @@ def page_header(title: str, subtitle: str | None = None):
 def get_app_icon_path(default: str = "assets/Dots_icon.png") -> str | None:
     p = Path(default)
     return str(p) if p.exists() else None
+
+def apply_brand_styles():
+    st.markdown(
+        """
+        <style>
+        :root{
+            --soft-blue: #8FB9FF;
+            --mint-green: #AEEBD5;
+            --peach: #FFC7B2;
+            --lavender: #D9C8FF;
+            --pale-yellow: #FFF1A8;
+
+            --ink: #2B2B2B;
+            --border: rgba(50, 50, 50, 0.10);
+        }
+
+        /* Make the whole app feel airy */
+        .block-container {
+            padding-top: 1.1rem;
+            padding-bottom: 2.2rem;
+            max-width: 980px;   /* keeps content elegant, not stretched */
+        }
+
+        html, body, [class*="css"]  { color: var(--ink); }
+
+        /* Main page background (soft warm white) */
+        [data-testid="stAppViewContainer"]{
+            background: #FFFDF8;
+        }
+
+        /* Sidebar background: gentle gradient */
+        [data-testid="stSidebar"] {
+            background: linear-gradient(
+              180deg,
+              rgba(143, 185, 255, 0.14) 0%,
+              rgba(217, 200, 255, 0.12) 45%,
+              rgba(255, 241, 168, 0.08) 100%
+            );
+            border-right: 1px solid rgba(50,50,50,0.06);
+        }
+
+        /* IMPORTANT: remove the "everything is a card" look */
+        [data-testid="stVerticalBlockBorderWrapper"]{
+            background: transparent !important;
+            border: none !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+        }
+
+        /* Expanders: gentle hover only */
+        details > summary {
+            border-radius: 12px !important;
+        }
+        details > summary:hover {
+            background: rgba(143,185,255,0.08);
+        }
+
+        /* Buttons: soft and consistent */
+        .stButton > button,
+        .stDownloadButton > button,
+        .stLinkButton > a {
+            border-radius: 12px !important;
+            border: 1px solid rgba(143,185,255,0.30) !important;
+        }
+
+        /* Alerts: softer look */
+        [data-testid="stAlert"]{
+            border-radius: 14px;
+            border: 1px solid rgba(50,50,50,0.08);
+            box-shadow: none;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
