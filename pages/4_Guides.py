@@ -2,7 +2,6 @@ import streamlit as st
 from components.ui import apply_brand_styles, set_sidebar_branding, language_toggle, get_lang, page_header
 
 st.set_page_config(page_title="Guides", layout="wide")
-language_toggle(sidebar=True)
 
 from pathlib import Path
 
