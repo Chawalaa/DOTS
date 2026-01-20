@@ -93,7 +93,7 @@ with c1:
         )
     else:
         st.markdown(
-            f"[{('View' if lang == 'English' else '表示'}]({QUICK_REF_VIEW_URL})"
+            f"[{('View' if lang == 'English' else '表示')}]({QUICK_REF_VIEW_URL})"
         )
 
 with c2:
