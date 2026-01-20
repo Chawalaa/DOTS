@@ -24,24 +24,32 @@ language_toggle(sidebar=True)
 page_header(t("home_title"), t("home_subtitle"))
 st.write(t("home_intro"))
 
-st.subheader("Quick actions" if get_lang() == "English" else "クイックアクション")
+st.subheader("Quick actions" if lang == "English" else "クイックアクション")
 c1, c2, c3 = st.columns(3)
 
 with c1:
-    st.page_link(
-        "pages/4_Guides.py",
-        label="I’m talking to parents" if get_lang() == "English" else "保護者と話す",
-    )
+    if st.button(
+        "I’m talking to parents" if lang == "English" else "保護者と話す",
+        use_container_width=True,
+        key="qa_parents",
+    ):
+        st.switch_page("pages/4_Guides.py")
+
 with c2:
-    st.page_link(
-        "pages/4_Guides.py",
-        label="I’m talking to students" if get_lang() == "English" else "生徒と話す",
-    )
+    if st.button(
+        "I’m talking to students" if lang == "English" else "生徒と話す",
+        use_container_width=True,
+        key="qa_students",
+    ):
+        st.switch_page("pages/4_Guides.py")
+
 with c3:
-    st.page_link(
-        "pages/4_Guides.py",
-        label="I’m talking to colleagues" if get_lang() == "English" else "同僚と話す",
-    )
+    if st.button(
+        "I’m talking to colleagues" if lang == "English" else "同僚と話す",
+        use_container_width=True,
+        key="qa_colleagues",
+    ):
+        st.switch_page("pages/4_Guides.py")
 
 st.divider()
 
