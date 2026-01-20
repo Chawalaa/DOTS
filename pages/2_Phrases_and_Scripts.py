@@ -17,7 +17,7 @@ from components.ui import (
 # ----------------------------
 st.set_page_config(
     page_title="Phrases and Scripts",
-    page_icon=get_app_icon_path() or "💬",
+    page_icon=get_app_icon_path(),
     layout="wide",
     initial_sidebar_state="collapsed",
 )
@@ -88,13 +88,13 @@ with c1:
     # View (opens in new tab, does not download)
     if hasattr(st, "link_button"):
         st.link_button(
-            "View (opens in new tab)" if lang == "English" else "表示（新しいタブ）",
+            "View" if lang == "English" else "表示",
             QUICK_REF_VIEW_URL,
             use_container_width=True,
         )
     else:
         st.markdown(
-            f"[{('View (opens in new tab)' if lang == 'English' else '表示（新しいタブ）')}]({QUICK_REF_VIEW_URL})"
+            f"[{('View' if lang == 'English' else '表示'}]({QUICK_REF_VIEW_URL})"
         )
 
 with c2:
