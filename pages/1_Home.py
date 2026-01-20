@@ -24,6 +24,7 @@ language_toggle(sidebar=True)
 page_header(t("home_title"), t("home_subtitle"))
 st.write(t("home_intro"))
 
+lang = get_lang()
 st.subheader("Quick actions" if lang == "English" else "クイックアクション")
 c1, c2, c3 = st.columns(3)
 
