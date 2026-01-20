@@ -52,10 +52,6 @@ def t(key: str) -> str:
 # Global styles (pastel + airy)
 # -----------------------------
 def apply_brand_styles():
-    """
-    Light, calm, pastel look without heavy "boxed screenshot" boundaries.
-    Call on every page after st.set_page_config(...).
-    """
     st.markdown(
         """
         <style>
@@ -67,65 +63,96 @@ def apply_brand_styles():
             --pale-yellow: #FFF1A8;
 
             --ink: #2B2B2B;
-            --border: rgba(50, 50, 50, 0.10);
         }
 
         html, body, [class*="css"]  { color: var(--ink); }
 
-        /* Main page background (soft warm white) */
+        /* App background */
         [data-testid="stAppViewContainer"]{
             background: #FFFDF8;
         }
 
-        /* Airy layout */
-        .block-container {
+        /* Content width on desktop */
+        .block-container{
             padding-top: 1.1rem;
             padding-bottom: 2.2rem;
-            max-width: 980px;  /* polished reading width */
+            max-width: 980px;
         }
 
-        /* Sidebar background: gentle gradient */
+        /* Sidebar background MUST be opaque (no rgba) */
         [data-testid="stSidebar"]{
             background: linear-gradient(
               180deg,
-              rgba(143, 185, 255, 0.14) 0%,
-              rgba(217, 200, 255, 0.12) 45%,
-              rgba(255, 241, 168, 0.08) 100%
+              #F3F7FF 0%,
+              #F7F2FF 45%,
+              #FFF9E8 100%
             );
             border-right: 1px solid rgba(50,50,50,0.06);
         }
 
-        /* IMPORTANT: remove the "everything is a card" look */
-        [data-testid="stVerticalBlockBorderWrapper"]{
-            background: transparent !important;
-            border: none !important;
-            border-radius: 0 !important;
-            box-shadow: none !important;
+        /* Make sidebar overlay look clean on mobile */
+        @media (max-width: 768px){
+            /* keep content readable */
+            .block-container{
+                padding-left: 1rem;
+                padding-right: 1rem;
+                max-width: 100%;
+            }
+
+            /* reduce huge titles on phone */
+            h1{
+                font-size: 2.0rem !important;
+                line-height: 1.15 !important;
+            }
+            h2{
+                font-size: 1.35rem !important;
+                line-height: 1.2 !important;
+            }
         }
 
-        /* Expanders: gentle hover */
-        details > summary { border-radius: 12px !important; }
-        details > summary:hover { background: rgba(143,185,255,0.08); }
-
-        /* Buttons: soft and consistent */
+        /* Buttons */
         .stButton > button,
         .stDownloadButton > button,
         .stLinkButton > a{
             border-radius: 12px !important;
             border: 1px solid rgba(143,185,255,0.30) !important;
         }
-
-        /* Alerts: softer look */
-        [data-testid="stAlert"]{
-            border-radius: 14px;
-            border: 1px solid rgba(50,50,50,0.08);
-            box-shadow: none;
-        }
         </style>
         """,
         unsafe_allow_html=True,
     )
 
+
+def set_sidebar_branding(title: str = "Menu"):
+    safe_title = title.replace('"', '\\"')
+
+    st.markdown(
+        f"""
+        <style>
+        /* Hide Streamlit's default nav header pieces (desktop + mobile variants) */
+        [data-testid="stSidebarNav"] header {{ display: none !important; }}
+        [data-testid="stSidebarNavTitle"] {{ display: none !important; }}
+        [data-testid="stSidebarNav"] > div:first-child {{ display: none !important; }}
+
+        /* This one is the usual culprit that shows "app" on some builds:
+           hide the first TWO direct div children inside the nav container */
+        [data-testid="stSidebarNav"] > div:nth-child(-n+2) {{ display: none !important; }}
+
+        /* Add our own header above the page list */
+        [data-testid="stSidebarNav"]::before {{
+            content: "•••  {safe_title}";
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            opacity: 0.90;
+            padding: 10px 12px 6px 12px;
+            margin-top: 2px;
+            color: var(--ink);
+        }}
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
 
 def soft_card(html: str):
     """
