@@ -214,29 +214,11 @@ def set_sidebar_branding(title: str = "Menu"):
     st.markdown(
         f"""
         <style>
-        /* --- Kill the built-in Streamlit nav header across desktop + mobile --- */
-        [data-testid="stSidebarNavTitle"] {{ display: none !important; }}
-        [data-testid="stSidebarNav"] header {{ display: none !important; }}
-        [data-testid="stSidebarNav"] > div:first-child {{ display: none !important; }}
-
-        /* Mobile builds often put "app" as a standalone text element.
-           Hide the first label-like element inside the nav area. */
-        [data-testid="stSidebarNav"] span {{
-            font-size: 0px !important;
-        }}
-
-        /* More targeted: hide small text blocks that appear above page list */
-        [data-testid="stSidebarNav"] p {{
+        /* Hide the first two children inside the sidebar nav container */
+        [data-testid="stSidebarNav"] > div:nth-child(-n+2) {{
             display: none !important;
         }}
 
-        /* Also remove the blank space where that header was */
-        [data-testid="stSidebarNav"] {{
-            padding-top: 0rem !important;
-            margin-top: 0rem !important;
-        }}
-
-        /* --- Our custom header (Menu) --- */
         [data-testid="stSidebarNav"]::before {{
             content: "•••  {safe_title}";
             display: block;
