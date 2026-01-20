@@ -12,7 +12,8 @@ from components.ui import (
 st.set_page_config(
     page_title="Home",
     page_icon=get_app_icon_path() ,
-    layout="wide",
+    initial_sidebar_state="collapsed"
+
 )
 
 # Branding + sidebar
