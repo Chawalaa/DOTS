@@ -26,4 +26,4 @@ if "boot" not in st.session_state:
 
 # Fallback if someone somehow lands here after boot
 lang = get_lang()
-st.write("Open Home from the sidebar" if lang == "English" else "サイドバーからホームを開いてください →")
+st.write("Open Home from the sidebar" if lang == "English" else "サイドバーからホームを開いてください")
