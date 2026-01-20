@@ -54,22 +54,32 @@ with c3:
 
 st.divider()
 
-st.subheader("Explore" if get_lang() == "English" else "探す")
+lang = get_lang()
+
+st.subheader("Explore" if lang == "English" else "探す")
 q1, q2, q3 = st.columns(3)
 
 with q1:
-    st.page_link(
-        "pages/2_Phrases_and_Scripts.py",
-        label="Browse phrases & scripts" if get_lang() == "English" else "フレーズ／台本を見る",
-    )
+    if st.button(
+        "Browse phrases & scripts" if lang == "English" else "フレーズ／台本を見る",
+        use_container_width=True,
+        key="ex_phrases",
+    ):
+        st.switch_page("pages/2_Phrases_and_Scripts.py")
+
 with q2:
-    st.page_link(
-        "pages/3_Visual_Tools.py",
-        label="Explore visual tools" if get_lang() == "English" else "視覚ツールを見る",
-    )
+    if st.button(
+        "Explore visual tools" if lang == "English" else "視覚ツールを見る",
+        use_container_width=True,
+        key="ex_visual",
+    ):
+        st.switch_page("pages/3_Visual_Tools.py")
+
 with q3:
-    st.page_link(
-        "pages/4_Guides.py",
-        label="View conversation guides" if get_lang() == "English" else "会話ガイドを見る",
-    )
+    if st.button(
+        "View conversation guides" if lang == "English" else "会話ガイドを見る",
+        use_container_width=True,
+        key="ex_guides",
+    ):
+        st.switch_page("pages/4_Guides.py")
 
