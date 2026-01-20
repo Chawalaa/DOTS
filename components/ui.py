@@ -155,6 +155,53 @@ div[data-testid="column"]:nth-child(3) .stButton > button:hover {
     background: rgba(217, 200, 255, 0.42) !important;
 }
 
+/* ---------- Explore: colored tiles ---------- */
+/* This targets the next 3-column row of buttons after Quick actions.
+   If you later add more 3-column rows, tell me and I’ll make it key-based. */
+
+div[data-testid="column"]:nth-child(1) .stButton > button[key="ex_phrases"] {}
+
+/* Key-based is not supported directly by CSS selectors in Streamlit markup,
+   so we style the "Explore row" by using a container hook approach below. */
+
+/* Style the Explore buttons by the order within THEIR row.
+   This works if Explore is the second 3-column row of buttons on Home. */
+
+/* Soft Blue */
+div[data-testid="stHorizontalBlock"] + div[data-testid="stHorizontalBlock"]
+  div[data-testid="column"]:nth-child(1) .stButton > button {
+    background: rgba(143, 185, 255, 0.24) !important;
+    border: 1px solid rgba(143, 185, 255, 0.45) !important;
+}
+
+/* Pale Yellow */
+div[data-testid="stHorizontalBlock"] + div[data-testid="stHorizontalBlock"]
+  div[data-testid="column"]:nth-child(2) .stButton > button {
+    background: rgba(255, 241, 168, 0.32) !important;
+    border: 1px solid rgba(255, 241, 168, 0.55) !important;
+}
+
+/* Lavender */
+div[data-testid="stHorizontalBlock"] + div[data-testid="stHorizontalBlock"]
+  div[data-testid="column"]:nth-child(3) .stButton > button {
+    background: rgba(217, 200, 255, 0.32) !important;
+    border: 1px solid rgba(217, 200, 255, 0.55) !important;
+}
+
+/* Hover states */
+div[data-testid="stHorizontalBlock"] + div[data-testid="stHorizontalBlock"]
+  div[data-testid="column"]:nth-child(1) .stButton > button:hover {
+    background: rgba(143, 185, 255, 0.34) !important;
+}
+div[data-testid="stHorizontalBlock"] + div[data-testid="stHorizontalBlock"]
+  div[data-testid="column"]:nth-child(2) .stButton > button:hover {
+    background: rgba(255, 241, 168, 0.42) !important;
+}
+div[data-testid="stHorizontalBlock"] + div[data-testid="stHorizontalBlock"]
+  div[data-testid="column"]:nth-child(3) .stButton > button:hover {
+    background: rgba(217, 200, 255, 0.42) !important;
+}
+
         </style>
         """,
         unsafe_allow_html=True,
