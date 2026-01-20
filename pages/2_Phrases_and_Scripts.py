@@ -56,7 +56,6 @@ def load_quick_ref_pdf_bytes():
     except Exception:
         return None, "Quick Staff Room Reference.pdf"
 
-
 # ----------------------------
 # Content
 # ----------------------------
