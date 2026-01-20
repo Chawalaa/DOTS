@@ -214,30 +214,44 @@ def set_sidebar_branding(title: str = "Menu"):
     st.markdown(
         f"""
         <style>
-        /* Hide Streamlit's default nav header pieces (desktop + mobile variants) */
-        [data-testid="stSidebarNav"] header {{ display: none !important; }}
+        /* --- Kill the built-in Streamlit nav header across desktop + mobile --- */
         [data-testid="stSidebarNavTitle"] {{ display: none !important; }}
+        [data-testid="stSidebarNav"] header {{ display: none !important; }}
         [data-testid="stSidebarNav"] > div:first-child {{ display: none !important; }}
 
-        /* This one is the usual culprit that shows "app" on some builds:
-           hide the first TWO direct div children inside the nav container */
-        [data-testid="stSidebarNav"] > div:nth-child(-n+2) {{ display: none !important; }}
+        /* Mobile builds often put "app" as a standalone text element.
+           Hide the first label-like element inside the nav area. */
+        [data-testid="stSidebarNav"] span {{
+            font-size: 0px !important;
+        }}
 
-        /* Add our own header above the page list */
+        /* More targeted: hide small text blocks that appear above page list */
+        [data-testid="stSidebarNav"] p {{
+            display: none !important;
+        }}
+
+        /* Also remove the blank space where that header was */
+        [data-testid="stSidebarNav"] {{
+            padding-top: 0rem !important;
+            margin-top: 0rem !important;
+        }}
+
+        /* --- Our custom header (Menu) --- */
         [data-testid="stSidebarNav"]::before {{
             content: "•••  {safe_title}";
             display: block;
             font-size: 14px;
-            font-weight: 600;
-            opacity: 0.90;
+            font-weight: 700;
+            opacity: 0.92;
             padding: 10px 12px 6px 12px;
             margin-top: 2px;
-            color: var(--ink);
+            color: #2B2B2B;
         }}
         </style>
         """,
         unsafe_allow_html=True,
     )
+
 
 def soft_card(html: str):
     """
