@@ -117,6 +117,44 @@ def apply_brand_styles():
             border-radius: 12px !important;
             border: 1px solid rgba(143,185,255,0.30) !important;
         }
+        /* ---------- Quick actions: colored tiles (Parents / Students / Colleagues) ---------- */
+/* Targets the 3 buttons in the first 3-column row on the page.
+   If you later add more 3-column rows above it, tell me and I'll make it key-based. */
+
+div[data-testid="column"]:nth-child(1) .stButton > button {
+    background: rgba(255, 199, 178, 0.32) !important;   /* peach */
+    border: 1px solid rgba(255, 199, 178, 0.55) !important;
+}
+
+div[data-testid="column"]:nth-child(2) .stButton > button {
+    background: rgba(174, 235, 213, 0.32) !important;   /* mint */
+    border: 1px solid rgba(174, 235, 213, 0.55) !important;
+}
+
+div[data-testid="column"]:nth-child(3) .stButton > button {
+    background: rgba(217, 200, 255, 0.32) !important;   /* lavender */
+    border: 1px solid rgba(217, 200, 255, 0.55) !important;
+}
+
+/* Shared tile styling */
+.stButton > button {
+    color: #2B2B2B !important;
+    font-weight: 650 !important;
+    padding: 0.95rem 1rem !important;
+    border-radius: 14px !important;
+}
+
+/* Hover */
+div[data-testid="column"]:nth-child(1) .stButton > button:hover {
+    background: rgba(255, 199, 178, 0.42) !important;
+}
+div[data-testid="column"]:nth-child(2) .stButton > button:hover {
+    background: rgba(174, 235, 213, 0.42) !important;
+}
+div[data-testid="column"]:nth-child(3) .stButton > button:hover {
+    background: rgba(217, 200, 255, 0.42) !important;
+}
+
         </style>
         """,
         unsafe_allow_html=True,
