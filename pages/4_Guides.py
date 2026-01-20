@@ -1,4 +1,7 @@
 import streamlit as st
+from pathlib import Path
+import urllib.parse
+import urllib.request
 
 from components.ui import (
     apply_brand_styles,
@@ -9,20 +12,52 @@ from components.ui import (
     get_app_icon_path,
 )
 
+# ---------- Page config ----------
 st.set_page_config(
     page_title="Guides",
-    page_icon=get_app_icon_path(),
+    page_icon=get_app_icon_path() or "🧭",
     layout="wide",
-    initial_sidebar_state="collapsed"
+    initial_sidebar_state="collapsed",
 )
 
-# Global look + sidebar "Menu" above pages + language toggle
+# ---------- Branding + sidebar ----------
 apply_brand_styles()
-set_sidebar_branding("Menu")
+set_sidebar_branding("Menu" if get_lang() == "English" else "メニュー")
 language_toggle(sidebar=True)
 
 lang = get_lang()
 
+# ---------- PDF helpers ----------
+# Your GitHub blob link (for reference):
+# https://github.com/Chawalaa/DOTS/blob/main/assets/Conversation%20Support%20Card%20.pdf
+
+RAW_PDF_URL = "https://raw.githubusercontent.com/Chawalaa/DOTS/main/assets/Conversation%20Support%20Card%20.pdf"
+VIEWER_URL = "https://drive.google.com/viewerng/viewer?embedded=true&url=" + urllib.parse.quote(
+    RAW_PDF_URL, safe=""
+)
+
+def load_pdf_bytes():
+    """
+    Try local first (assets folder). If not found, fetch from GitHub raw URL.
+    Handles both possible filenames (with and without the extra space).
+    """
+    candidates = [
+        Path("assets") / "Conversation Support Card.pdf",
+        Path("assets") / "Conversation Support Card .pdf",  # (space before .pdf)
+    ]
+    for p in candidates:
+        if p.exists():
+            return p.read_bytes(), p.name
+
+    # fallback: fetch from GitHub raw
+    try:
+        with urllib.request.urlopen(RAW_PDF_URL) as resp:
+            return resp.read(), "Conversation Support Card.pdf"
+    except Exception:
+        return None, "Conversation Support Card.pdf"
+
+
+# ---------- Page content ----------
 page_header(
     "Guides for Common Situations" if lang == "English" else "よくある場面のガイド",
     "Short structures for conversations educators often find stressful or unclear."
@@ -38,7 +73,9 @@ st.write(
 
 st.divider()
 
-# --- Parents ---
+# =========================
+# Parents
+# =========================
 st.subheader("First conversation with parents" if lang == "English" else "保護者との最初の会話")
 
 st.markdown(
@@ -70,9 +107,48 @@ st.markdown(
     )
 )
 
+# ---- Conversation Support Card (moved here) ----
+st.markdown("### " + ("Conversation Support Card" if lang == "English" else "会話サポートカード"))
+
+pdf_bytes, pdf_name = load_pdf_bytes()
+
+c1, c2 = st.columns(2)
+
+with c1:
+    # View (opens viewer in a new tab — not a download)
+    if hasattr(st, "link_button"):
+        st.link_button(
+            "View card (opens in new tab)" if lang == "English" else "カードを表示（新しいタブ）",
+            VIEWER_URL,
+            use_container_width=True,
+        )
+    else:
+        st.markdown(
+            f"[{('View card (opens in new tab)' if lang == 'English' else 'カードを表示（新しいタブ）')}]({VIEWER_URL})"
+        )
+
+with c2:
+    # Download (from local bytes if available, otherwise fetched from GitHub raw)
+    if pdf_bytes:
+        st.download_button(
+            label="Download PDF" if lang == "English" else "PDFをダウンロード",
+            data=pdf_bytes,
+            file_name="Conversation Support Card.pdf",
+            mime="application/pdf",
+            use_container_width=True,
+        )
+    else:
+        st.warning(
+            "Couldn’t load the PDF. Confirm it exists in GitHub assets and the filename matches."
+            if lang == "English"
+            else "PDFを読み込めませんでした。GitHubのassetsに存在し、ファイル名が一致しているか確認してください。"
+        )
+
 st.divider()
 
-# --- Students ---
+# =========================
+# Students
+# =========================
 st.subheader("Talking with students" if lang == "English" else "生徒と話す")
 
 st.markdown(
@@ -106,7 +182,9 @@ st.markdown(
 
 st.divider()
 
-# --- Colleagues ---
+# =========================
+# Colleagues
+# =========================
 st.subheader("Talking with colleagues" if lang == "English" else "同僚と話す")
 
 st.markdown(
@@ -143,4 +221,3 @@ st.caption(
     if lang == "English"
     else "このガイドは、非臨床・非評価・協働重視の立ち位置を保つために設計されています。"
 )
-
