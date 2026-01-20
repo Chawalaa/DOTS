@@ -3,7 +3,7 @@ from pathlib import Path
 
 from components.ui import apply_brand_styles, set_sidebar_branding, language_toggle, get_lang, page_header
 
-st.set_page_config(page_title="Contact Team", layout="wide")
+st.set_page_config(page_title="Contact Team", layout="wide", initial_sidebar_state="collapsed")
 
 # Branding + sidebar
 apply_brand_styles()
