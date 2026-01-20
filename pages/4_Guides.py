@@ -15,7 +15,7 @@ from components.ui import (
 # ---------- Page config ----------
 st.set_page_config(
     page_title="Guides",
-    page_icon=get_app_icon_path() or "🧭",
+    page_icon=get_app_icon_path(),
     layout="wide",
     initial_sidebar_state="collapsed",
 )
