@@ -207,18 +207,13 @@ div[data-testid="stHorizontalBlock"] + div[data-testid="stHorizontalBlock"]
         unsafe_allow_html=True,
     )
 
-
 def set_sidebar_branding(title: str = "Menu"):
     safe_title = title.replace('"', '\\"')
 
     st.markdown(
         f"""
         <style>
-        /* Hide the first two children inside the sidebar nav container */
-        [data-testid="stSidebarNav"] > div:nth-child(-n+2) {{
-            display: none !important;
-        }}
-
+        /* Custom label above the page list */
         [data-testid="stSidebarNav"]::before {{
             content: "•••  {safe_title}";
             display: block;
@@ -228,6 +223,21 @@ def set_sidebar_branding(title: str = "Menu"):
             padding: 10px 12px 6px 12px;
             margin-top: 2px;
             color: #2B2B2B;
+        }}
+
+        /* --- Hide the "app" entry (it is the FIRST nav item in your build) --- */
+        [data-testid="stSidebarNav"] ul > li:first-child {{
+            display: none !important;
+        }}
+
+        /* Backup selector for DOM variations */
+        [data-testid="stSidebarNav"] [role="list"] > *:first-child {{
+            display: none !important;
+        }}
+
+        /* Optional: remove extra spacing after hiding */
+        [data-testid="stSidebarNav"] ul {{
+            margin-top: 0.25rem !important;
         }}
         </style>
         """,
