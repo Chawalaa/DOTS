@@ -1,6 +1,5 @@
 import streamlit as st
-
-from components.ui import apply_brand_styles, set_sidebar_branding, language_toggle, get_lang
+from components.ui import apply_brand_styles, set_sidebar_branding, language_toggle, get_lang, page_header, t
 
 st.set_page_config(
     page_title="Home",
@@ -12,8 +11,13 @@ apply_brand_styles()
 set_sidebar_branding("Menu" if get_lang() == "English" else "メニュー")
 language_toggle(sidebar=True)
 
+# --- HOME CONTENT STARTS HERE ---
 page_header(t("home_title"), t("home_subtitle"))
 st.write(t("home_intro"))
+
+# Quick actions + Explore (your button version goes here)
+# --- HOME CONTENT ENDS HERE ---
+
 
 lang = get_lang()
 st.subheader("Quick actions" if lang == "English" else "クイックアクション")
