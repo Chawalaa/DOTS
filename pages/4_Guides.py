@@ -44,7 +44,7 @@ def load_pdf_bytes():
     candidates = [
         Path("assets") / "Conversation Support Card.pdf",
         Path("assets") / "Conversation Support Card .pdf",  # (space before .pdf)
-        Path("assets") / "Conversation Support Card 2.pdf",
+        Path("assets") / "Conversation Support Card (2).pdf",
     ]
     for p in candidates:
         if p.exists():
