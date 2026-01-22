@@ -180,6 +180,52 @@ st.markdown(
     )
 )
 
+# ---- Student Narrative Card (View + Download) ----
+st.markdown("### " + ("Student Narrative Card" if lang == "English" else "生徒向けナラティブカード"))
+
+from pathlib import Path
+import urllib.parse
+
+pdf_filename = "Student Narrative Card.pdf"
+pdf_path = Path("assets") / pdf_filename
+
+# View uses the GitHub raw URL (works on Streamlit Cloud)
+GITHUB_RAW_BASE = "https://raw.githubusercontent.com/Chawalaa/DOTS/main/assets/"
+raw_url = GITHUB_RAW_BASE + urllib.parse.quote(pdf_filename)
+view_url = "https://drive.google.com/viewerng/viewer?embedded=true&url=" + urllib.parse.quote(raw_url, safe="")
+
+c1, c2 = st.columns(2)
+
+with c1:
+    # View (opens in a new tab, does not force download)
+    if hasattr(st, "link_button"):
+        st.link_button(
+            "View (opens in new tab)" if lang == "English" else "表示（新しいタブ）",
+            view_url,
+            use_container_width=True,
+        )
+    else:
+        st.markdown(
+            f"[{('View (opens in new tab)' if lang == 'English' else '表示（新しいタブ）')}]({view_url})"
+        )
+
+with c2:
+    # Download (from local assets file)
+    if pdf_path.exists():
+        st.download_button(
+            label="Download PDF" if lang == "English" else "PDFをダウンロード",
+            data=pdf_path.read_bytes(),
+            file_name=pdf_filename,
+            mime="application/pdf",
+            use_container_width=True,
+        )
+    else:
+        st.error(
+            f"PDF not found: assets/{pdf_filename}. Upload it to your GitHub repo under assets/."
+            if lang == "English"
+            else f"PDFが見つかりません：assets/{pdf_filename} をGitHubの assets/ にアップロードしてください。"
+        )
+
 st.divider()
 
 # =========================
