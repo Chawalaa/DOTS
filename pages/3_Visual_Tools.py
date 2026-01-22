@@ -42,13 +42,13 @@ def pdf_view_download_buttons(label_title_en: str, label_title_ja: str, pdf_file
     with c1:
         if hasattr(st, "link_button"):
             st.link_button(
-                "View (opens in new tab)" if get_lang() == "English" else "表示（新しいタブ）",
+                "View" if get_lang() == "English" else "表示（新しいタブ）",
                 view_url,
                 use_container_width=True,
             )
         else:
             st.markdown(
-                f"[{('View (opens in new tab)' if get_lang() == 'English' else '表示（新しいタブ）')}]({view_url})"
+                f"[{('View' if get_lang() == 'English' else '表示（新しいタブ）')}]({view_url})"
             )
 
     with c2:
