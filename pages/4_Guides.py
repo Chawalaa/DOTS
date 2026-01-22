@@ -28,10 +28,10 @@ language_toggle(sidebar=True)
 lang = get_lang()
 
 # ---------- PDF helpers ----------
-# Your GitHub blob link (for reference):
-# https://github.com/Chawalaa/DOTS/blob/main/assets/Conversation%20Support%20Card.pdf
+# GitHub raw URL (MUST NOT include /blob/)
+RAW_PDF_URL = "https://raw.githubusercontent.com/Chawalaa/DOTS/main/assets/Conversation%20Support%20Card.pdf"
 
-RAW_PDF_URL = "https://raw.githubusercontent.com/Chawalaa/DOTS/blob/main/assets/Conversation%20Support%20Card.pdf"
+# Viewer URL (opens in new tab, does not force download)
 VIEWER_URL = "https://drive.google.com/viewerng/viewer?embedded=true&url=" + urllib.parse.quote(
     RAW_PDF_URL, safe=""
 )
@@ -43,7 +43,7 @@ def load_pdf_bytes():
     """
     candidates = [
         Path("assets") / "Conversation Support Card.pdf",
-        Path("assets") / "Conversation Support Card .pdf",  # (space before .pdf)
+        Path("assets") / "Conversation Support Card .pdf",  # space before .pdf
     ]
     for p in candidates:
         if p.exists():
@@ -53,9 +53,9 @@ def load_pdf_bytes():
     try:
         with urllib.request.urlopen(RAW_PDF_URL) as resp:
             return resp.read(), "Conversation Support Card.pdf"
-    except Exception:
+    except Exception as e:
+        st.error(f"Could not fetch PDF from GitHub: {e}")
         return None, "Conversation Support Card.pdf"
-
 
 # ---------- Page content ----------
 page_header(
