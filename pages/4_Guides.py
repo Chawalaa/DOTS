@@ -29,9 +29,9 @@ lang = get_lang()
 
 # ---------- PDF helpers ----------
 # Your GitHub blob link (for reference):
-# https://github.com/Chawalaa/DOTS/blob/main/assets/Conversation%20Support%20Card%20.pdf
+# https://github.com/Chawalaa/DOTS/blob/main/assets/Conversation%20Support%20Card.pdf
 
-RAW_PDF_URL = "https://raw.githubusercontent.com/Chawalaa/DOTS/main/assets/Conversation%20Support%20Card%20 .pdf"
+RAW_PDF_URL = "https://raw.githubusercontent.com/Chawalaa/DOTS/blob/main/assets/Conversation%20Support%20Card.pdf"
 VIEWER_URL = "https://drive.google.com/viewerng/viewer?embedded=true&url=" + urllib.parse.quote(
     RAW_PDF_URL, safe=""
 )
@@ -118,7 +118,7 @@ with c1:
     # View (opens viewer in a new tab — not a download)
     if hasattr(st, "link_button"):
         st.link_button(
-            "View card" if lang == "English" else "表示",
+            "View" if lang == "English" else "表示",
             VIEWER_URL,
             use_container_width=True,
         )
