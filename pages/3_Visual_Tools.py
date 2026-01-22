@@ -76,7 +76,7 @@ with st.expander("Dots Narrative" if get_lang() == "English" else "Dots（ドッ
     pdf_download_button(
         label_en="Download Dots Narrative (PDF)",
         label_ja="Dots ナラティブ（PDF）をダウンロード",
-        pdf_filename="Dots Narrative.pdf",
+        pdf_filename="Dots.pdf",
     )
 
 # --- Waves ---
@@ -104,7 +104,7 @@ with st.expander("Waves Narrative" if get_lang() == "English" else "Waves（波�
     pdf_download_button(
         label_en="Download Waves Narrative (PDF)",
         label_ja="Waves ナラティブ（PDF）をダウンロード",
-        pdf_filename="Waves Narrative.pdf",
+        pdf_filename="Waves.pdf",
     )
 
 # --- Pathways ---
@@ -132,7 +132,7 @@ with st.expander("Pathways Narrative" if get_lang() == "English" else "Pathways�
     pdf_download_button(
         label_en="Download Pathways Narrative (PDF)",
         label_ja="Pathways ナラティブ（PDF）をダウンロード",
-        pdf_filename="Pathways Narrative.pdf",
+        pdf_filename="Pathways.pdf",
     )
 
 st.info(
