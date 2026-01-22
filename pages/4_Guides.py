@@ -44,6 +44,7 @@ def load_pdf_bytes():
     candidates = [
         Path("assets") / "Conversation Support Card.pdf",
         Path("assets") / "Conversation Support Card .pdf",  # (space before .pdf)
+        Path("assets") / "Conversation Support Card 2.pdf",
     ]
     for p in candidates:
         if p.exists():
@@ -118,13 +119,13 @@ with c1:
     # View (opens viewer in a new tab — not a download)
     if hasattr(st, "link_button"):
         st.link_button(
-            "View card" if lang == "English" else "カードを表示（新しいタブ）",
+            "View card" if lang == "English" else "カードを表示",
             VIEWER_URL,
             use_container_width=True,
         )
     else:
         st.markdown(
-            f"[{('View card' if lang == 'English' else 'カードを表示（新しいタブ）')}]({VIEWER_URL})"
+            f"[{('View card' if lang == 'English' else 'カードを表示')}]({VIEWER_URL})"
         )
 
 with c2:
@@ -200,13 +201,13 @@ with c1:
     # View (opens in a new tab, does not force download)
     if hasattr(st, "link_button"):
         st.link_button(
-            "View (opens in new tab)" if lang == "English" else "表示（新しいタブ）",
+            "View" if lang == "English" else "表示",
             view_url,
             use_container_width=True,
         )
     else:
         st.markdown(
-            f"[{('View (opens in new tab)' if lang == 'English' else '表示（新しいタブ）')}]({view_url})"
+            f"[{('View' if lang == 'English' else '表示')}]({view_url})"
         )
 
 with c2:
