@@ -31,7 +31,7 @@ lang = get_lang()
 # Your GitHub blob link (for reference):
 # https://github.com/Chawalaa/DOTS/blob/main/assets/Conversation%20Support%20Card%20.pdf
 
-RAW_PDF_URL = "https://raw.githubusercontent.com/Chawalaa/DOTS/main/assets/Conversation%20Support%20Card%20.pdf"
+RAW_PDF_URL = "https://raw.githubusercontent.com/Chawalaa/DOTS/main/assets/Conversation%20Support%20Card%20 .pdf"
 VIEWER_URL = "https://drive.google.com/viewerng/viewer?embedded=true&url=" + urllib.parse.quote(
     RAW_PDF_URL, safe=""
 )
@@ -44,7 +44,6 @@ def load_pdf_bytes():
     candidates = [
         Path("assets") / "Conversation Support Card.pdf",
         Path("assets") / "Conversation Support Card .pdf",  # (space before .pdf)
-        Path("assets") / "Conversation Support Card (2).pdf",
     ]
     for p in candidates:
         if p.exists():
@@ -119,13 +118,13 @@ with c1:
     # View (opens viewer in a new tab — not a download)
     if hasattr(st, "link_button"):
         st.link_button(
-            "View card" if lang == "English" else "カードを表示",
+            "View card" if lang == "English" else "表示",
             VIEWER_URL,
             use_container_width=True,
         )
     else:
         st.markdown(
-            f"[{('View card' if lang == 'English' else 'カードを表示')}]({VIEWER_URL})"
+            f"[{('View' if lang == 'English' else '表示')}]({VIEWER_URL})"
         )
 
 with c2:
