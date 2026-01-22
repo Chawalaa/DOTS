@@ -118,13 +118,13 @@ with c1:
     # View (opens viewer in a new tab — not a download)
     if hasattr(st, "link_button"):
         st.link_button(
-            "View card (opens in new tab)" if lang == "English" else "カードを表示（新しいタブ）",
+            "View card" if lang == "English" else "カードを表示（新しいタブ）",
             VIEWER_URL,
             use_container_width=True,
         )
     else:
         st.markdown(
-            f"[{('View card (opens in new tab)' if lang == 'English' else 'カードを表示（新しいタブ）')}]({VIEWER_URL})"
+            f"[{('View card' if lang == 'English' else 'カードを表示（新しいタブ）')}]({VIEWER_URL})"
         )
 
 with c2:
